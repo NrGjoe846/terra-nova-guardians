@@ -11,7 +11,7 @@ import { EcoDrone } from "@/components/EcoDrone";
 import { AvatarEvolution as BioModuleEvolution } from "@/components/AvatarEvolution";
 import { DailyStreak } from "@/components/DailyStreak";
 import { BioForgeSynthesis } from "@/components/BioForgeSynthesis";
-import { NeuralSanctuary } from "@/components/NeuralSanctuary";
+import { EcoSanctuary as NeuralSanctuary } from "@/components/NeuralSanctuary";
 import { QuestLog } from "@/components/QuestLog";
 import { Inventory } from "@/components/Inventory";
 import { CraftingBench } from "@/components/CraftingBench";
