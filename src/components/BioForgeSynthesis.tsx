@@ -75,6 +75,18 @@ export const BioForgeSynthesis = ({ onGameComplete }: BioForgeSynthesisProps) =>
         if (prev <= 1) {
           clearInterval(timer);
           setGameActive(false);
+          
+          // Update global tracking data
+          const globalData = {
+            gameType: "bioforge",
+            points: score,
+            synthesesCompleted: synthesizedCount,
+            playerId: "current-player"
+          };
+          
+          // In a real implementation, this would send data to a backend service
+          console.log("Global tracking data:", globalData);
+          
           onGameComplete(score);
           return 0;
         }
