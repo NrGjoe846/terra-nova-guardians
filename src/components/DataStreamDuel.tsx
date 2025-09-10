@@ -80,6 +80,17 @@ export const DataStreamDuel = ({ onQuizComplete }: DataStreamDuelProps) => {
 
   const handleNextQuestion = useCallback(() => {
     if (currentQuestion + 1 >= dataQuestions.length) {
+      // Update global tracking data
+      const globalData = {
+        gameType: "datastream",
+        points: score,
+        questionsAnswered: dataQuestions.length,
+        playerId: "current-player"
+      };
+      
+      // In a real implementation, this would send data to a backend service
+      console.log("Global tracking data:", globalData);
+      
       onQuizComplete(score);
       return;
     }
