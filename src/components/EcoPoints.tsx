@@ -1,5 +1,3 @@
-import { Zap } from "lucide-react";
-
 interface EcoPointsProps {
   points: number;
   showLabel?: boolean;
@@ -10,21 +8,21 @@ export const EcoPoints = ({ points, showLabel = true, size = "md" }: EcoPointsPr
   const sizeClasses = {
     sm: "text-sm",
     md: "text-lg", 
-    lg: "text-2xl"
+    lg: "text-3xl"
   };
 
   const iconSizes = {
-    sm: 16,
-    md: 20,
-    lg: 24
+    sm: "text-lg",
+    md: "text-2xl",
+    lg: "text-4xl"
   };
 
   return (
-    <div className="flex items-center gap-2 text-primary font-semibold holo-text">
-      <Zap size={iconSizes[size]} className="text-primary animate-energy-pulse" />
+    <div className="flex items-center gap-2 text-primary font-bold cheerful-text">
+      <span className={`${iconSizes[size]} animate-sparkle`}>🌟</span>
       <span className={sizeClasses[size]}>
         {points.toLocaleString()}
-        {showLabel && " Bio-Credits"}
+        {showLabel && " Helper Points"}
       </span>
     </div>
   );
