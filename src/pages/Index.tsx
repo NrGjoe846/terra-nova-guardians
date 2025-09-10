@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { BioSynthCard } from "@/components/ui/BioSynthCard";
+import { BioSynthCard } from "@/components/BioSynthCard";
 import { BioSynthButton } from "@/components/ui/BioSynthButton";
 import { Badge } from "@/components/ui/badge";
 import { EcoPoints } from "@/components/EcoPoints";
 import { LevelProgress } from "@/components/LevelProgress";
-import { BioSynthMap } from "@/components/BioSynthMap";
+import { TerraNovaMap } from "@/components/TerraNovaMap";
 import { DecontaminateProtocol } from "@/components/DecontaminateProtocol";
 import { DataStreamDuel } from "@/components/DataStreamDuel";
 import { EcoDrone } from "@/components/EcoDrone";
-import { BioModuleEvolution } from "@/components/BioModuleEvolution";
+import { AvatarEvolution as BioModuleEvolution } from "@/components/AvatarEvolution";
 import { DailyStreak } from "@/components/DailyStreak";
 import { BioForgeSynthesis } from "@/components/BioForgeSynthesis";
 import { NeuralSanctuary } from "@/components/NeuralSanctuary";
@@ -112,7 +112,7 @@ const Index = () => {
     switch (currentView) {
       case "map":
         return (
-          <BioSynthMap 
+          <TerraNovaMap 
             regions={regions}
             onRegionSelect={(regionId) => {
               console.log("Selected region:", regionId);
