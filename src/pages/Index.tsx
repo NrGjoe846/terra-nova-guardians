@@ -12,11 +12,17 @@ import { AvatarEvolution as BioModuleEvolution } from "@/components/AvatarEvolut
 import { DailyStreak } from "@/components/DailyStreak";
 import { BioForgeSynthesis } from "@/components/BioForgeSynthesis";
 import { NeuralSanctuary } from "@/components/NeuralSanctuary";
+import { QuestLog } from "@/components/QuestLog";
+import { Inventory } from "@/components/Inventory";
+import { CraftingBench } from "@/components/CraftingBench";
+import { GlobalImpactDisplay } from "@/components/GlobalImpactDisplay";
+import { Leaderboard } from "@/components/Leaderboard";
 import { Cpu, Globe, Zap, Users, Database, Gamepad2, Home, CircuitBoard } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Quest, InventoryItem, GameProgress } from "@/types/game";
 
 const Index = () => {
-  const [currentView, setCurrentView] = useState<"home" | "map" | "decontaminate" | "duel" | "bioforge" | "sanctuary" | "evolution">("home");
+  const [currentView, setCurrentView] = useState<"home" | "map" | "decontaminate" | "duel" | "bioforge" | "sanctuary" | "evolution" | "quests" | "inventory" | "crafting" | "global" | "leaderboard">("home");
   const [showEvolution, setShowEvolution] = useState(false);
   const [playerData, setPlayerData] = useState({
     name: "Bio-Synth Guardian",
@@ -28,7 +34,33 @@ const Index = () => {
     regionsUnlocked: 1,
     dailyStreak: 5,
     bioModulePoints: 3,
-    achievements: ["system-online", "decontamination-expert", "data-stream-champion", "daily-operative", "corruption-purger"]
+    achievements: ["system-online", "decontamination-expert", "data-stream-champion", "daily-operative", "corruption-purger"],
+    inventory: [
+      { resourceId: "bio-material", quantity: 5 },
+      { resourceId: "energy-core", quantity: 2 },
+      { resourceId: "data-fragment", quantity: 8 },
+      { resourceId: "synthetic-component", quantity: 1 }
+    ] as InventoryItem[],
+    craftedItems: [
+      { itemId: "guardian-badge", quantity: 1 }
+    ],
+    gameProgress: {
+      gamesCompleted: {
+        decontaminate: 12,
+        datastream: 8,
+        bioforge: 5
+      },
+      resourcesCollected: {
+        "bio-material": 15,
+        "energy-core": 3,
+        "data-fragment": 22,
+        "synthetic-component": 2
+      },
+      itemsCrafted: {
+        "bio-enhancer": 2,
+        "guardian-badge": 1
+      }
+    } as GameProgress
   });
   const { toast } = useToast();
 
@@ -68,16 +100,52 @@ const Index = () => {
   ];
 
   const handleActivityComplete = (points: number) => {
+    // Determine which game was completed and award resources
+    const gameType = currentView === "decontaminate" ? "decontaminate" : 
+                    currentView === "duel" ? "datastream" : 
+                    currentView === "bioforge" ? "bioforge" : "unknown";
+    
+    // Award random resources based on game type
+    const resourceRewards = {
+      decontaminate: [
+        { resourceId: "bio-material", quantity: Math.floor(Math.random() * 2) + 1 },
+        { resourceId: "energy-core", quantity: Math.random() > 0.7 ? 1 : 0 }
+      ],
+      datastream: [
+        { resourceId: "data-fragment", quantity: Math.floor(Math.random() * 3) + 1 },
+        { resourceId: "synthetic-component", quantity: Math.random() > 0.8 ? 1 : 0 }
+      ],
+      bioforge: [
+        { resourceId: "bio-material", quantity: Math.floor(Math.random() * 2) + 1 },
+        { resourceId: "synthetic-component", quantity: Math.random() > 0.6 ? 1 : 0 }
+      ]
+    };
+
     setPlayerData(prev => ({
       ...prev,
       bioCredits: prev.bioCredits + points,
-      xp: prev.xp + points
+      xp: prev.xp + points,
+      gameProgress: {
+        ...prev.gameProgress,
+        gamesCompleted: {
+          ...prev.gameProgress.gamesCompleted,
+          [gameType]: (prev.gameProgress.gamesCompleted[gameType] || 0) + 1
+        }
+      },
+      inventory: prev.inventory.map(item => {
+        const reward = resourceRewards[gameType as keyof typeof resourceRewards]?.find(r => r.resourceId === item.resourceId);
+        return reward ? { ...item, quantity: item.quantity + reward.quantity } : item;
+      }).concat(
+        resourceRewards[gameType as keyof typeof resourceRewards]?.filter(reward => 
+          !prev.inventory.some(item => item.resourceId === reward.resourceId)
+        ).map(reward => ({ resourceId: reward.resourceId, quantity: reward.quantity })) || []
+      )
     }));
     setCurrentView("home");
     
     toast({
       title: "System Operation Complete! ⚡",
-      description: `You earned ${points} Bio-Credits!`,
+      description: `You earned ${points} Bio-Credits and resources!`,
     });
   };
 
@@ -105,6 +173,109 @@ const Index = () => {
     toast({
       title: "Daily System Reward Claimed! 💾",
       description: `You received ${reward.amount || 25} Bio-Credits!`,
+    });
+  };
+
+  const handleQuestComplete = (quest: Quest) => {
+    let totalBioCredits = 0;
+    let totalXP = 0;
+    const newResources: InventoryItem[] = [];
+    const newItems: { itemId: string; quantity: number }[] = [];
+
+    quest.rewards.forEach(reward => {
+      switch (reward.type) {
+        case "bio-credits":
+          totalBioCredits += reward.amount || 0;
+          break;
+        case "xp":
+          totalXP += reward.amount || 0;
+          break;
+        case "resource":
+          if (reward.resourceType) {
+            newResources.push({ resourceId: reward.resourceType, quantity: reward.amount || 1 });
+          }
+          break;
+        case "item":
+          if (reward.itemId) {
+            newItems.push({ itemId: reward.itemId, quantity: 1 });
+          }
+          break;
+      }
+    });
+
+    setPlayerData(prev => ({
+      ...prev,
+      bioCredits: prev.bioCredits + totalBioCredits,
+      xp: prev.xp + totalXP,
+      inventory: prev.inventory.map(item => {
+        const newResource = newResources.find(r => r.resourceId === item.resourceId);
+        return newResource ? { ...item, quantity: item.quantity + newResource.quantity } : item;
+      }).concat(
+        newResources.filter(newResource => 
+          !prev.inventory.some(item => item.resourceId === newResource.resourceId)
+        )
+      ),
+      craftedItems: prev.craftedItems.map(item => {
+        const newItem = newItems.find(i => i.itemId === item.itemId);
+        return newItem ? { ...item, quantity: item.quantity + newItem.quantity } : item;
+      }).concat(
+        newItems.filter(newItem => 
+          !prev.craftedItems.some(item => item.itemId === newItem.itemId)
+        )
+      )
+    }));
+
+    toast({
+      title: "Quest Completed! 🎉",
+      description: `${quest.title} - Rewards claimed!`,
+    });
+  };
+
+  const handleQuestActivate = (questId: string) => {
+    toast({
+      title: "Quest Activated! 📋",
+      description: "New objectives added to your quest log!",
+    });
+  };
+
+  const handleCraft = (recipeId: string) => {
+    // This would implement the actual crafting logic
+    // For now, just show success message
+    toast({
+      title: "Item Crafted! 🔧",
+      description: "Successfully created new item!",
+    });
+  };
+
+  const handleResourceUse = (resourceId: string, quantity: number) => {
+    setPlayerData(prev => ({
+      ...prev,
+      inventory: prev.inventory.map(item => 
+        item.resourceId === resourceId 
+          ? { ...item, quantity: Math.max(0, item.quantity - quantity) }
+          : item
+      ).filter(item => item.quantity > 0)
+    }));
+
+    toast({
+      title: "Resource Used",
+      description: `Used ${quantity} ${resourceId.replace('-', ' ')}`,
+    });
+  };
+
+  const handleItemUse = (itemId: string) => {
+    setPlayerData(prev => ({
+      ...prev,
+      craftedItems: prev.craftedItems.map(item => 
+        item.itemId === itemId 
+          ? { ...item, quantity: Math.max(0, item.quantity - 1) }
+          : item
+      ).filter(item => item.quantity > 0)
+    }));
+
+    toast({
+      title: "Item Used",
+      description: `Used ${itemId.replace('-', ' ')}`,
     });
   };
 
@@ -137,6 +308,56 @@ const Index = () => {
                 ...prev,
                 bioCredits: prev.bioCredits - cost
               }));
+            }}
+          />
+        );
+      case "quests":
+        return (
+          <QuestLog
+            playerLevel={playerData.level}
+            bioCredits={playerData.bioCredits}
+            gameProgress={playerData.gameProgress}
+            onQuestComplete={handleQuestComplete}
+            onQuestActivate={handleQuestActivate}
+          />
+        );
+      case "inventory":
+        return (
+          <Inventory
+            inventory={playerData.inventory}
+            craftedItems={playerData.craftedItems}
+            onResourceUse={handleResourceUse}
+            onItemUse={handleItemUse}
+          />
+        );
+      case "crafting":
+        return (
+          <CraftingBench
+            playerLevel={playerData.level}
+            inventory={playerData.inventory}
+            onCraft={handleCraft}
+          />
+        );
+      case "global":
+        return (
+          <GlobalImpactDisplay
+            playerContribution={{
+              bioCreditsEarned: playerData.bioCredits,
+              pollutionCleansed: playerData.gameProgress.gamesCompleted.decontaminate * 10,
+              dataProcessed: playerData.gameProgress.gamesCompleted.datastream * 15,
+              synthesesCompleted: playerData.gameProgress.gamesCompleted.bioforge * 5
+            }}
+          />
+        );
+      case "leaderboard":
+        return (
+          <Leaderboard
+            playerName={playerData.name}
+            playerStats={{
+              bioCredits: playerData.bioCredits,
+              level: playerData.level,
+              gamesCompleted: Object.values(playerData.gameProgress.gamesCompleted).reduce((a, b) => a + b, 0),
+              questsCompleted: 5 // This would be tracked in real implementation
             }}
           />
         );
@@ -269,6 +490,25 @@ const Index = () => {
 
         <BioSynthCard className="p-6 hud-panel">
           <div className="flex items-center gap-4 mb-4">
+            <Database className="text-accent animate-circuit-pulse" size={32} />
+            <div>
+              <h3 className="text-xl font-bold holo-text">Quest Log</h3>
+              <p className="text-muted-foreground">
+                Track your missions and earn rewards for completing objectives
+              </p>
+            </div>
+          </div>
+          <BioSynthButton 
+            variant="aether" 
+            onClick={() => setCurrentView("quests")}
+            className="w-full"
+          >
+            View Quests
+          </BioSynthButton>
+        </BioSynthCard>
+
+        <BioSynthCard className="p-6 hud-panel">
+          <div className="flex items-center gap-4 mb-4">
             <Home className="text-accent animate-circuit-pulse" size={32} />
             <div>
               <h3 className="text-xl font-bold holo-text">Neural Sanctuary</h3>
@@ -284,6 +524,34 @@ const Index = () => {
           >
             Enter Sanctuary
           </BioSynthButton>
+        </BioSynthCard>
+
+        <BioSynthCard className="p-6 hud-panel">
+          <div className="flex items-center gap-4 mb-4">
+            <CircuitBoard className="text-secondary animate-circuit-pulse" size={32} />
+            <div>
+              <h3 className="text-xl font-bold holo-text">Inventory & Crafting</h3>
+              <p className="text-muted-foreground">
+                Manage resources and craft powerful items and upgrades
+              </p>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <BioSynthButton 
+              variant="geo-kinetic" 
+              onClick={() => setCurrentView("inventory")}
+              className="w-full"
+            >
+              📦 Inventory ({playerData.inventory.length})
+            </BioSynthButton>
+            <BioSynthButton 
+              variant="hydro-core" 
+              onClick={() => setCurrentView("crafting")}
+              className="w-full"
+            >
+              🔧 Crafting Bench
+            </BioSynthButton>
+          </div>
         </BioSynthCard>
 
         <BioSynthCard className="p-6 hud-panel">
@@ -332,6 +600,34 @@ const Index = () => {
           >
             💾 Data Stream Duel
           </BioSynthButton>
+        </BioSynthCard>
+
+        <BioSynthCard className="p-6 hud-panel">
+          <div className="flex items-center gap-4 mb-4">
+            <Users className="text-river animate-circuit-pulse" size={32} />
+            <div>
+              <h3 className="text-xl font-bold holo-text">Community Hub</h3>
+              <p className="text-muted-foreground">
+                View global impact and compete with other Guardians
+              </p>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <BioSynthButton 
+              variant="aether" 
+              onClick={() => setCurrentView("global")}
+              className="w-full"
+            >
+              🌍 Global Impact
+            </BioSynthButton>
+            <BioSynthButton 
+              variant="bio-energy" 
+              onClick={() => setCurrentView("leaderboard")}
+              className="w-full"
+            >
+              🏆 Leaderboards
+            </BioSynthButton>
+          </div>
         </BioSynthCard>
       </div>
 
@@ -388,10 +684,3 @@ const Index = () => {
 };
 
 export default Index;
-
-
-
-
-
-
-
