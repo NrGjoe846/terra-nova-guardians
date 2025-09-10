@@ -2,137 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Eco-Guardians Design System - Terra Nova inspired colors and effects
+/* Bio-Synth Guardians Design System - Terra Nova Cyberpunk Theme
+Dark black backgrounds with glowing green neon accents and high-tech aesthetics.
 All colors MUST be HSL for proper theming.
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
 @layer base {
   :root {
-    /* Core Terra Nova palette */
-    --background: 120 25% 98%;
-    --foreground: 150 25% 15%;
+    /* Core Bio-Synth palette - Dark & Neon */
+    --background: 220 15% 8%;
+    --foreground: 120 25% 90%;
 
-    /* Elemental nature cards */
-    --card: 120 30% 97%;
-    --card-foreground: 150 25% 15%;
+    /* Bio-Tech cards - Dark with subtle transparency */
+    --card: 220 20% 12%;
+    --card-foreground: 120 25% 90%;
 
-    --popover: 120 30% 97%;
-    --popover-foreground: 150 25% 15%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 120 25% 90%;
 
-    /* Forest Guardian primary (emerald green) */
-    --primary: 150 75% 35%;
-    --primary-foreground: 120 25% 98%;
-    --primary-glow: 150 60% 50%;
+    /* Primary Bio-Energy (neon green) */
+    --primary: 120 100% 50%;
+    --primary-foreground: 220 15% 8%;
+    --primary-glow: 120 100% 60%;
 
-    /* Mountain Guardian secondary (earth brown) */
-    --secondary: 25 35% 45%;
-    --secondary-foreground: 120 25% 98%;
+    /* Secondary Geo-Kinetic (amber/orange) */
+    --secondary: 35 100% 50%;
+    --secondary-foreground: 220 15% 8%;
 
-    /* Subtle nature tones */
-    --muted: 120 20% 92%;
-    --muted-foreground: 150 15% 40%;
+    /* Muted tech tones */
+    --muted: 220 15% 15%;
+    --muted-foreground: 120 15% 65%;
 
-    /* Sky Guardian accent (celestial blue) */
-    --accent: 200 75% 55%;
-    --accent-foreground: 120 25% 98%;
+    /* Aether Weave accent (cyan blue) */
+    --accent: 180 100% 50%;
+    --accent-foreground: 220 15% 8%;
 
-    /* River Guardian (ocean blue) */
-    --river: 210 85% 45%;
-    --river-foreground: 120 25% 98%;
+    /* Hydro-Core (aqua) */
+    --river: 190 100% 45%;
+    --river-foreground: 220 15% 8%;
 
-    /* Danger/Shadow Blight */
-    --destructive: 0 75% 50%;
-    --destructive-foreground: 120 25% 98%;
+    /* System Error/Corruption */
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 120 25% 90%;
 
     /* UI elements */
-    --border: 120 20% 85%;
-    --input: 120 20% 90%;
-    --ring: 150 75% 35%;
+    --border: 120 30% 20%;
+    --input: 220 15% 18%;
+    --ring: 120 100% 50%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Terra Nova magical gradients */
-    --gradient-forest: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-sky: linear-gradient(135deg, hsl(var(--accent)), hsl(200 60% 70%));
-    --gradient-earth: linear-gradient(135deg, hsl(var(--secondary)), hsl(35 45% 55%));
-    --gradient-river: linear-gradient(135deg, hsl(var(--river)), hsl(210 70% 60%));
-    --gradient-terra: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    /* Bio-Synth magical gradients */
+    --gradient-bio-energy: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-aether: linear-gradient(135deg, hsl(var(--accent)), hsl(180 80% 60%));
+    --gradient-geo-kinetic: linear-gradient(135deg, hsl(var(--secondary)), hsl(45 90% 55%));
+    --gradient-hydro-core: linear-gradient(135deg, hsl(var(--river)), hsl(190 80% 60%));
+    --gradient-system: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
 
-    /* Elemental shadows and glows */
-    --shadow-forest: 0 10px 30px -10px hsl(var(--primary) / 0.3);
-    --shadow-sky: 0 10px 30px -10px hsl(var(--accent) / 0.3);
-    --shadow-magical: 0 0 40px hsl(var(--primary-glow) / 0.4);
-    --glow-elemental: 0 0 20px hsl(var(--primary) / 0.5);
+    /* Cyberpunk shadows and glows */
+    --shadow-bio: 0 0 30px hsl(var(--primary) / 0.4);
+    --shadow-aether: 0 0 30px hsl(var(--accent) / 0.4);
+    --shadow-corruption: 0 0 40px hsl(var(--destructive) / 0.3);
+    --glow-neon: 0 0 20px hsl(var(--primary) / 0.8);
+    --glow-circuit: 0 0 15px hsl(var(--primary) / 0.6);
 
-    /* Smooth nature animations */
-    --transition-nature: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-float: transform 0.3s ease-in-out;
+    /* High-tech animations */
+    --transition-cyber: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-glow: all 0.4s ease-in-out;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 120 25% 85%;
+    --sidebar-primary: 120 100% 50%;
+    --sidebar-primary-foreground: 220 15% 8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 120 25% 85%;
+    --sidebar-border: 120 30% 20%;
+    --sidebar-ring: 120 100% 50%;
   }
 
   .dark {
-    /* Dark Terra Nova - mysterious night forest */
-    --background: 150 20% 8%;
-    --foreground: 120 25% 90%;
+    /* Enhanced dark mode for Bio-Synth theme */
+    --background: 220 15% 6%;
+    --foreground: 120 25% 95%;
 
-    --card: 150 25% 10%;
-    --card-foreground: 120 25% 90%;
+    --card: 220 20% 10%;
+    --card-foreground: 120 25% 95%;
 
-    --popover: 150 25% 10%;
-    --popover-foreground: 120 25% 90%;
+    --popover: 220 20% 10%;
+    --popover-foreground: 120 25% 95%;
 
-    /* Glowing forest primary in dark */
-    --primary: 150 65% 55%;
-    --primary-foreground: 150 20% 8%;
-    --primary-glow: 150 75% 65%;
+    /* Intensified neon in dark mode */
+    --primary: 120 100% 55%;
+    --primary-foreground: 220 15% 6%;
+    --primary-glow: 120 100% 65%;
 
-    /* Dark mountain secondary */
-    --secondary: 25 25% 25%;
-    --secondary-foreground: 120 25% 90%;
+    --secondary: 35 100% 55%;
+    --secondary-foreground: 220 15% 6%;
 
-    /* Dark muted tones */
-    --muted: 150 15% 15%;
-    --muted-foreground: 120 15% 65%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 120 15% 70%;
 
-    /* Glowing sky accent */
-    --accent: 200 70% 60%;
-    --accent-foreground: 150 20% 8%;
+    --accent: 180 100% 55%;
+    --accent-foreground: 220 15% 6%;
 
-    /* Dark river */
-    --river: 210 80% 50%;
-    --river-foreground: 150 20% 8%;
+    --river: 190 100% 50%;
+    --river-foreground: 220 15% 6%;
 
-    /* Shadow Blight in dark */
-    --destructive: 0 65% 45%;
-    --destructive-foreground: 120 25% 90%;
+    --destructive: 0 100% 55%;
+    --destructive-foreground: 120 25% 95%;
 
-    /* Dark UI elements */
-    --border: 150 20% 20%;
-    --input: 150 20% 15%;
-    --ring: 150 65% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 120 30% 18%;
+    --input: 220 15% 15%;
+    --ring: 120 100% 55%;
+
+    --sidebar-background: 220 20% 8%;
+    --sidebar-foreground: 120 25% 90%;
+    --sidebar-primary: 120 100% 55%;
+    --sidebar-primary-foreground: 220 15% 6%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 120 25% 90%;
+    --sidebar-border: 120 30% 18%;
+    --sidebar-ring: 120 100% 55%;
   }
 }
 
@@ -142,12 +134,30 @@ All colors MUST be HSL for proper theming.
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
-    background: linear-gradient(135deg, hsl(var(--background)), hsl(120 20% 95%));
+    @apply bg-background text-foreground;
+    font-family: 'Rajdhani', 'Orbitron', sans-serif;
+    background: radial-gradient(ellipse at center, hsl(220 15% 10%) 0%, hsl(220 15% 6%) 100%);
     min-height: 100vh;
+    position: relative;
   }
 
-  /* Magical scrollbar for Terra Nova */
+  /* Cyberpunk circuit board background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(90deg, hsl(var(--primary) / 0.03) 1px, transparent 1px),
+      linear-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Bio-luminescent scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -157,68 +167,290 @@ All colors MUST be HSL for proper theming.
   }
   
   ::-webkit-scrollbar-thumb {
-    background: var(--gradient-forest);
+    background: var(--gradient-bio-energy);
     @apply rounded-full;
+    box-shadow: var(--glow-circuit);
+  }
+
+  /* High-tech typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .bio-synth-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gradient-bio-energy);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px hsl(var(--primary) / 0.5));
   }
 }
 
 @layer components {
-  /* Elemental button variants */
-  .btn-forest {
-    background: var(--gradient-forest);
+  /* Bio-Synth button variants */
+  .btn-bio-energy {
+    background: var(--gradient-bio-energy);
     @apply text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
-    box-shadow: var(--shadow-forest);
+    box-shadow: var(--shadow-bio);
+    border: 1px solid hsl(var(--primary) / 0.3);
+    position: relative;
+    overflow: hidden;
   }
 
-  .btn-sky {
-    background: var(--gradient-sky);
+  .btn-bio-energy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-bio-energy:hover::before {
+    left: 100%;
+  }
+
+  .btn-aether {
+    background: var(--gradient-aether);
     @apply text-accent-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
-    box-shadow: var(--shadow-sky);
+    box-shadow: var(--shadow-aether);
+    border: 1px solid hsl(var(--accent) / 0.3);
   }
 
-  .btn-earth {
-    background: var(--gradient-earth);
+  .btn-geo-kinetic {
+    background: var(--gradient-geo-kinetic);
     @apply text-secondary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+    box-shadow: 0 0 30px hsl(var(--secondary) / 0.4);
+    border: 1px solid hsl(var(--secondary) / 0.3);
   }
 
-  .btn-river {
-    background: var(--gradient-river);
+  .btn-hydro-core {
+    background: var(--gradient-hydro-core);
     @apply text-river-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+    box-shadow: 0 0 30px hsl(var(--river) / 0.4);
+    border: 1px solid hsl(var(--river) / 0.3);
   }
 
-  /* Magical floating animation */
-  .float-gentle {
-    animation: float 3s ease-in-out infinite;
+  /* Holographic floating animation */
+  .holo-float {
+    animation: holoFloat 4s ease-in-out infinite;
   }
 
-  .glow-elemental {
-    box-shadow: var(--glow-elemental);
+  .neon-glow {
+    box-shadow: var(--glow-neon);
+    border: 1px solid hsl(var(--primary) / 0.5);
   }
 
-  /* Terra Nova card styles */
-  .card-elemental {
-    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl;
-    box-shadow: var(--shadow-forest);
-    transition: var(--transition-nature);
+  /* Bio-Synth card styles */
+  .card-bio-synth {
+    @apply bg-card/90 backdrop-blur-md border border-border/50 rounded-2xl;
+    box-shadow: var(--shadow-bio);
+    transition: var(--transition-cyber);
+    position: relative;
+    overflow: hidden;
   }
 
-  .card-elemental:hover {
+  .card-bio-synth::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--gradient-bio-energy);
+    opacity: 0.6;
+  }
+
+  .card-bio-synth:hover {
     @apply transform scale-105;
-    box-shadow: var(--shadow-magical);
+    box-shadow: var(--glow-neon);
+    border-color: hsl(var(--primary) / 0.8);
+  }
+
+  /* HUD-style panels */
+  .hud-panel {
+    @apply bg-card/80 backdrop-blur-lg border border-primary/30 rounded-lg;
+    box-shadow: 
+      inset 0 1px 0 hsl(var(--primary) / 0.1),
+      0 0 20px hsl(var(--primary) / 0.2);
+    position: relative;
+  }
+
+  .hud-panel::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    box-shadow: 0 0 10px hsl(var(--primary));
+    animation: pulse 2s infinite;
+  }
+
+  /* Circuit pattern overlay */
+  .circuit-overlay {
+    position: relative;
+  }
+
+  .circuit-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, hsl(var(--accent) / 0.1) 2px, transparent 2px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  /* Data stream effect */
+  .data-stream {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .data-stream::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      hsl(var(--primary) / 0.1), 
+      hsl(var(--primary) / 0.2), 
+      hsl(var(--primary) / 0.1), 
+      transparent
+    );
+    animation: dataFlow 3s linear infinite;
+  }
+
+  /* Holographic text effect */
+  .holo-text {
+    color: hsl(var(--primary));
+    text-shadow: 
+      0 0 5px hsl(var(--primary) / 0.8),
+      0 0 10px hsl(var(--primary) / 0.6),
+      0 0 15px hsl(var(--primary) / 0.4);
+    font-family: 'Orbitron', monospace;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* System status indicators */
+  .status-online {
+    color: hsl(var(--primary));
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.8);
+  }
+
+  .status-warning {
+    color: hsl(var(--secondary));
+    text-shadow: 0 0 10px hsl(var(--secondary) / 0.8);
+  }
+
+  .status-error {
+    color: hsl(var(--destructive));
+    text-shadow: 0 0 10px hsl(var(--destructive) / 0.8);
   }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes holoFloat {
+  0%, 100% { transform: translateY(0px) rotateX(0deg); }
+  25% { transform: translateY(-8px) rotateX(2deg); }
+  50% { transform: translateY(-4px) rotateX(0deg); }
+  75% { transform: translateY(-12px) rotateX(-2deg); }
 }
 
-@keyframes sparkle {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.2); }
+@keyframes dataFlow {
+  0% { left: -100%; }
+  100% { left: 100%; }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: var(--glow-elemental); }
-  50% { box-shadow: 0 0 30px hsl(var(--primary) / 0.8); }
+@keyframes circuitPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes neonFlicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  51% { opacity: 1; }
+  52% { opacity: 0.9; }
+  53% { opacity: 1; }
+}
+
+@keyframes systemBoot {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 0.5; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hologramScan {
+  0% { transform: translateY(100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+
+@keyframes energyPulse {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.5); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--primary) / 0.4); }
+}
+
+/* Enhanced animations for Bio-Synth theme */
+.animate-holo-float {
+  animation: holoFloat 4s ease-in-out infinite;
+}
+
+.animate-data-flow {
+  animation: dataFlow 3s linear infinite;
+}
+
+.animate-circuit-pulse {
+  animation: circuitPulse 2s ease-in-out infinite;
+}
+
+.animate-neon-flicker {
+  animation: neonFlicker 0.1s infinite;
+}
+
+.animate-system-boot {
+  animation: systemBoot 0.8s ease-out;
+}
+
+.animate-hologram-scan {
+  animation: hologramScan 2s ease-in-out infinite;
+}
+
+.animate-energy-pulse {
+  animation: energyPulse 2s ease-in-out infinite;
+}
+
+/* Responsive Bio-Synth design */
+@media (max-width: 768px) {
+  .bio-synth-title {
+    font-size: 2rem;
+  }
+  
+  .card-bio-synth {
+    @apply rounded-xl;
+  }
+  
+  .hud-panel {
+    @apply rounded-md;
+  }
 }
