@@ -1,97 +1,96 @@
 import { useState } from "react";
-import { ElementalCard } from "@/components/ui/ElementalCard";
-import { ElementalButton } from "@/components/ui/ElementalButton";
+import { BioSynthCard } from "@/components/ui/BioSynthCard";
+import { BioSynthButton } from "@/components/ui/BioSynthButton";
 import { Badge } from "@/components/ui/badge";
 import { EcoPoints } from "@/components/EcoPoints";
 import { LevelProgress } from "@/components/LevelProgress";
-import { TerraNovaMap } from "@/components/TerraNovaMap";
-import { RecycleRushGame } from "@/components/RecycleRushGame";
-import { EcoQuiz } from "@/components/EcoQuiz";
-import { AvatarCompanion } from "@/components/AvatarCompanion";
-import { AvatarEvolution } from "@/components/AvatarEvolution";
+import { BioSynthMap } from "@/components/BioSynthMap";
+import { DecontaminateProtocol } from "@/components/DecontaminateProtocol";
+import { DataStreamDuel } from "@/components/DataStreamDuel";
+import { EcoDrone } from "@/components/EcoDrone";
+import { BioModuleEvolution } from "@/components/BioModuleEvolution";
 import { DailyStreak } from "@/components/DailyStreak";
-import { PollutionPurgeGame } from "@/components/PollutionPurgeGame";
-import { EcoSanctuary } from "@/components/EcoSanctuary";
-import { Sparkles, Globe, TreePine, Users, BookOpen, Gamepad2, Home, Zap } from "lucide-react";
-import guardianImage from "@/assets/elemental-guardians.jpg";
+import { BioForgeSynthesis } from "@/components/BioForgeSynthesis";
+import { NeuralSanctuary } from "@/components/NeuralSanctuary";
+import { Cpu, Globe, Zap, Users, Database, Gamepad2, Home, CircuitBoard } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const [currentView, setCurrentView] = useState<"home" | "map" | "game" | "quiz" | "pollution" | "sanctuary" | "evolution">("home");
+  const [currentView, setCurrentView] = useState<"home" | "map" | "decontaminate" | "duel" | "bioforge" | "sanctuary" | "evolution">("home");
   const [showEvolution, setShowEvolution] = useState(false);
   const [playerData, setPlayerData] = useState({
-    name: "New Guardian",
-    element: "forest" as const,
+    name: "Bio-Synth Guardian",
+    element: "bio-energy" as const,
     level: 3,
     xp: 150,
     xpForNext: 300,
-    ecoPoints: 750,
+    bioCredits: 750,
     regionsUnlocked: 1,
     dailyStreak: 5,
-    evolutionPoints: 3,
-    achievements: ["first-login", "recycle-master", "quiz-champion", "daily-warrior", "pollution-fighter"]
+    bioModulePoints: 3,
+    achievements: ["system-online", "decontamination-expert", "data-stream-champion", "daily-operative", "corruption-purger"]
   });
   const { toast } = useToast();
 
   const regions = [
     {
-      id: "forest",
-      name: "Withered Forest",
-      element: "forest" as const,
+      id: "bio-sector",
+      name: "Bio-Energy Sector",
+      element: "bio-energy" as const,
       unlocked: true,
       progress: 35,
-      description: "Ancient trees cry out for restoration"
+      description: "Primary bio-energy core requires system restoration"
     },
     {
-      id: "sky", 
-      name: "Clouded Peaks",
-      element: "sky" as const,
+      id: "aether-zone", 
+      name: "Aether Processing Zone",
+      element: "aether" as const,
       unlocked: false,
       progress: 0,
-      description: "The sky spirits await your call"
+      description: "Atmospheric processing systems offline"
     },
     {
-      id: "mountain",
-      name: "Silent Mountains", 
-      element: "earth" as const,
+      id: "geo-kinetic",
+      name: "Geo-Kinetic Grid", 
+      element: "geo-kinetic" as const,
       unlocked: false,
       progress: 0,
-      description: "Stone guardians slumber in darkness"
+      description: "Geological energy matrix in standby mode"
     },
     {
-      id: "river",
-      name: "Dried Rivers",
-      element: "river" as const, 
+      id: "hydro-core",
+      name: "Hydro-Core Network",
+      element: "hydro-core" as const, 
       unlocked: false,
       progress: 0,
-      description: "Once mighty waters reduced to whispers"
+      description: "Aquatic processing systems require activation"
     }
   ];
 
   const handleActivityComplete = (points: number) => {
     setPlayerData(prev => ({
       ...prev,
-      ecoPoints: prev.ecoPoints + points,
+      bioCredits: prev.bioCredits + points,
       xp: prev.xp + points
     }));
     setCurrentView("home");
     
     toast({
-      title: "Mission Complete! 🎉",
-      description: `You earned ${points} Eco-Points!`,
+      title: "System Operation Complete! ⚡",
+      description: `You earned ${points} Bio-Credits!`,
     });
   };
 
   const handleEvolutionSelect = (evolutionId: string) => {
     setPlayerData(prev => ({
       ...prev,
-      evolutionPoints: prev.evolutionPoints - 1
+      bioModulePoints: prev.bioModulePoints - 1
     }));
     setShowEvolution(false);
     
     toast({
-      title: "Evolution Complete! ✨",
-      description: "Your Guardian has evolved with new powers!",
+      title: "Bio-Module Integration Complete! 🔋",
+      description: "Your Bio-Synth Guardian has been upgraded!",
     });
   };
 
@@ -99,13 +98,13 @@ const Index = () => {
     const points = reward.amount || 25;
     setPlayerData(prev => ({
       ...prev,
-      ecoPoints: prev.ecoPoints + points,
+      bioCredits: prev.bioCredits + points,
       xp: prev.xp + (points / 2)
     }));
     
     toast({
-      title: "Daily Reward Claimed! 🎁",
-      description: `You received ${reward.amount || 25} Eco-Points!`,
+      title: "Daily System Reward Claimed! 💾",
+      description: `You received ${reward.amount || 25} Bio-Credits!`,
     });
   };
 
@@ -113,7 +112,7 @@ const Index = () => {
     switch (currentView) {
       case "map":
         return (
-          <TerraNovaMap 
+          <BioSynthMap 
             regions={regions}
             onRegionSelect={(regionId) => {
               console.log("Selected region:", regionId);
@@ -121,22 +120,22 @@ const Index = () => {
             }}
           />
         );
-      case "game":
-        return <RecycleRushGame onGameComplete={handleActivityComplete} />;
-      case "quiz":
-        return <EcoQuiz onQuizComplete={handleActivityComplete} />;
-      case "pollution":
-        return <PollutionPurgeGame onGameComplete={handleActivityComplete} />;
+      case "decontaminate":
+        return <DecontaminateProtocol onGameComplete={handleActivityComplete} />;
+      case "duel":
+        return <DataStreamDuel onQuizComplete={handleActivityComplete} />;
+      case "bioforge":
+        return <BioForgeSynthesis onGameComplete={handleActivityComplete} />;
       case "sanctuary":
         return (
-          <EcoSanctuary 
+          <NeuralSanctuary 
             playerLevel={playerData.level}
-            ecoPoints={playerData.ecoPoints}
+            bioCredits={playerData.bioCredits}
             achievements={playerData.achievements}
             onItemPurchase={(itemId, cost) => {
               setPlayerData(prev => ({
                 ...prev,
-                ecoPoints: prev.ecoPoints - cost
+                bioCredits: prev.bioCredits - cost
               }));
             }}
           />
@@ -150,49 +149,47 @@ const Index = () => {
     <div className="space-y-8">
       <div className="text-center space-y-6">
         <div className="relative">
-          <h1 className="text-5xl font-bold bg-gradient-terra bg-clip-text text-transparent mb-4">
-            Eco-Guardians
+          <h1 className="text-5xl font-bold bio-synth-title mb-4">
+            Terra Nova
           </h1>
-          <p className="text-2xl text-primary font-semibold">The Elemental Quest</p>
-          <Sparkles className="absolute -top-2 -right-4 text-primary animate-sparkle" size={24} />
+          <p className="text-2xl text-primary font-semibold holo-text">Bio-Synth Guardians</p>
+          <CircuitBoard className="absolute -top-2 -right-4 text-primary animate-energy-pulse" size={24} />
         </div>
         
         <div className="max-w-2xl mx-auto">
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Welcome to Terra Nova, a magical world where four ancient Elemental Cores have dimmed. 
-            As a newly awakened Eco-Guardian, you must restore balance through eco-challenges, 
-            mini-games, and environmental knowledge!
+            Welcome to Terra Nova, a bio-synthetic world where four critical System Cores have gone offline. 
+            As a newly activated Bio-Synth Guardian, you must restore system integrity through decontamination protocols, 
+            data stream operations, and environmental system management!
           </p>
         </div>
 
-        <ElementalCard floating className="max-w-md mx-auto p-6">
+        <BioSynthCard floating className="max-w-md mx-auto p-6 hud-panel">
           <div className="space-y-4">
             <div className="relative">
-              <img 
-                src={guardianImage}
-                alt="Elemental Guardians"
-                className="w-full h-48 object-cover rounded-xl"
-              />
+              <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center circuit-overlay">
+                <div className="text-8xl animate-holo-float">🤖</div>
+              </div>
               <div className="absolute top-2 right-2">
-                <AvatarCompanion 
-                  element={playerData.element} 
+                <EcoDrone 
+                  type={playerData.element} 
                   mood="curious" 
                   size="sm"
                   onClick={() => {
                     toast({
-                      title: "Your Companion Says Hi! 👋",
-                      description: "Your faithful companion is excited to explore Terra Nova with you!",
+                      title: "Eco-Drone Status: Online 🤖",
+                      description: "Your AI companion is ready for system operations!",
                     });
                   }}
                 />
               </div>
-              {playerData.evolutionPoints > 0 && (
+              {playerData.bioModulePoints > 0 && (
                 <div className="absolute top-2 left-2">
                   <button
                     onClick={() => setShowEvolution(true)}
-                    className="bg-primary text-primary-foreground rounded-full p-2 animate-pulse hover:scale-110 transition-transform"
+                    className="bg-primary text-primary-foreground rounded-full p-2 animate-energy-pulse hover:scale-110 transition-transform neon-glow"
                   >
-                    <Sparkles size={16} />
+                    <Cpu size={16} />
                   </button>
                 </div>
               )}
@@ -200,7 +197,7 @@ const Index = () => {
             <div className="space-y-2">
               <h3 className="text-xl font-bold">{playerData.name}</h3>
               <Badge variant="secondary" className="capitalize">
-                {playerData.element} Guardian
+                {playerData.element} Specialist
               </Badge>
               <LevelProgress 
                 currentLevel={playerData.level}
@@ -210,39 +207,39 @@ const Index = () => {
               />
             </div>
           </div>
-        </ElementalCard>
+        </BioSynthCard>
       </div>
 
       <div className="grid md:grid-cols-4 gap-6">
-        <ElementalCard className="p-6 text-center">
-          <Globe className="mx-auto text-primary mb-2" size={32} />
-          <h3 className="font-bold text-lg">Your Impact</h3>
-          <EcoPoints points={playerData.ecoPoints} size="lg" />
-        </ElementalCard>
+        <BioSynthCard className="p-6 text-center hud-panel">
+          <Globe className="mx-auto text-primary mb-2 animate-circuit-pulse" size={32} />
+          <h3 className="font-bold text-lg holo-text">System Impact</h3>
+          <EcoPoints points={playerData.bioCredits} size="lg" />
+        </BioSynthCard>
 
-        <ElementalCard className="p-6 text-center">
-          <TreePine className="mx-auto text-accent mb-2" size={32} />
-          <h3 className="font-bold text-lg">Regions Restored</h3>
+        <BioSynthCard className="p-6 text-center hud-panel">
+          <Zap className="mx-auto text-accent mb-2 animate-circuit-pulse" size={32} />
+          <h3 className="font-bold text-lg holo-text">Sectors Online</h3>
           <p className="text-2xl font-bold text-accent">
             {playerData.regionsUnlocked} / {regions.length}
           </p>
-        </ElementalCard>
+        </BioSynthCard>
 
-        <ElementalCard className="p-6 text-center">
-          <Users className="mx-auto text-river mb-2" size={32} />
-          <h3 className="font-bold text-lg">Guardian Rank</h3>
+        <BioSynthCard className="p-6 text-center hud-panel">
+          <Users className="mx-auto text-river mb-2 animate-circuit-pulse" size={32} />
+          <h3 className="font-bold text-lg holo-text">Guardian Rank</h3>
           <p className="text-2xl font-bold text-river">
             Level {playerData.level}
           </p>
-        </ElementalCard>
+        </BioSynthCard>
 
-        <ElementalCard className="p-6 text-center">
-          <Sparkles className="mx-auto text-orange-500 mb-2" size={32} />
-          <h3 className="font-bold text-lg">Daily Streak</h3>
+        <BioSynthCard className="p-6 text-center hud-panel">
+          <CircuitBoard className="mx-auto text-orange-500 mb-2 animate-circuit-pulse" size={32} />
+          <h3 className="font-bold text-lg holo-text">System Uptime</h3>
           <p className="text-2xl font-bold text-orange-500">
             {playerData.dailyStreak} Days
           </p>
-        </ElementalCard>
+        </BioSynthCard>
       </div>
 
       <DailyStreak 
@@ -251,118 +248,118 @@ const Index = () => {
       />
 
       <div className="grid md:grid-cols-2 gap-6">
-        <ElementalCard className="p-6">
+        <BioSynthCard className="p-6 hud-panel">
           <div className="flex items-center gap-4 mb-4">
-            <Globe className="text-primary" size={32} />
+            <Globe className="text-primary animate-circuit-pulse" size={32} />
             <div>
-              <h3 className="text-xl font-bold">Explore Terra Nova</h3>
+              <h3 className="text-xl font-bold holo-text">Access System Grid</h3>
               <p className="text-muted-foreground">
-                Visit the elemental regions and begin your restoration journey
+                Navigate the bio-synthetic sectors and initiate restoration protocols
               </p>
             </div>
           </div>
-          <ElementalButton 
-            element="forest" 
+          <BioSynthButton 
+            variant="bio-energy" 
             onClick={() => setCurrentView("map")}
             className="w-full"
           >
-            Open World Map
-          </ElementalButton>
-        </ElementalCard>
+            Access System Grid
+          </BioSynthButton>
+        </BioSynthCard>
 
-        <ElementalCard className="p-6">
+        <BioSynthCard className="p-6 hud-panel">
           <div className="flex items-center gap-4 mb-4">
-            <Home className="text-accent" size={32} />
+            <Home className="text-accent animate-circuit-pulse" size={32} />
             <div>
-              <h3 className="text-xl font-bold">Your Eco-Sanctuary</h3>
+              <h3 className="text-xl font-bold holo-text">Neural Sanctuary</h3>
               <p className="text-muted-foreground">
-                Customize your magical home base and tend to your gardens
+                Customize your digital command center and manage bio-nodes
               </p>
             </div>
           </div>
-          <ElementalButton 
-            element="sky" 
+          <BioSynthButton 
+            variant="aether" 
             onClick={() => setCurrentView("sanctuary")}
             className="w-full"
           >
-            Visit Sanctuary
-          </ElementalButton>
-        </ElementalCard>
+            Enter Sanctuary
+          </BioSynthButton>
+        </BioSynthCard>
 
-        <ElementalCard className="p-6">
+        <BioSynthCard className="p-6 hud-panel">
           <div className="flex items-center gap-4 mb-4">
-            <Gamepad2 className="text-river" size={32} />
+            <Gamepad2 className="text-river animate-circuit-pulse" size={32} />
             <div>
-              <h3 className="text-xl font-bold">Play Mini-Games</h3>
+              <h3 className="text-xl font-bold holo-text">System Protocols</h3>
               <p className="text-muted-foreground">
-                Learn through fun activities and earn Eco-Points
+                Execute system operations and earn Bio-Credits
               </p>
             </div>
           </div>
           <div className="space-y-2">
-            <ElementalButton 
-              element="river" 
-              onClick={() => setCurrentView("game")}
+            <BioSynthButton 
+              variant="hydro-core" 
+              onClick={() => setCurrentView("decontaminate")}
               className="w-full"
             >
-              ♻️ Recycle Rush
-            </ElementalButton>
-            <ElementalButton 
-              element="earth" 
-              onClick={() => setCurrentView("pollution")}
+              🧹 Decontaminate Protocol
+            </BioSynthButton>
+            <BioSynthButton 
+              variant="geo-kinetic" 
+              onClick={() => setCurrentView("bioforge")}
               className="w-full"
             >
-              <Zap className="mr-2" size={16} />
-              Pollution Purge
-            </ElementalButton>
+              <CircuitBoard className="mr-2" size={16} />
+              Bio-Forge Synthesis
+            </BioSynthButton>
           </div>
-        </ElementalCard>
+        </BioSynthCard>
 
-        <ElementalCard className="p-6">
+        <BioSynthCard className="p-6 hud-panel">
           <div className="flex items-center gap-4 mb-4">
-            <BookOpen className="text-secondary" size={32} />
+            <Database className="text-secondary animate-circuit-pulse" size={32} />
             <div>
-              <h3 className="text-xl font-bold">Test Your Knowledge</h3>
+              <h3 className="text-xl font-bold holo-text">Data Stream Analysis</h3>
               <p className="text-muted-foreground">
-                Answer eco-questions to gain wisdom and XP
+                Process environmental data streams to gain system access
               </p>
             </div>
           </div>
-          <ElementalButton 
-            element="forest" 
-            onClick={() => setCurrentView("quiz")}
+          <BioSynthButton 
+            variant="bio-energy" 
+            onClick={() => setCurrentView("duel")}
             className="w-full"
           >
-            🧠 Eco Quiz Challenge
-          </ElementalButton>
-        </ElementalCard>
+            💾 Data Stream Duel
+          </BioSynthButton>
+        </BioSynthCard>
       </div>
 
-      <ElementalCard className="p-6 bg-gradient-to-br from-primary/5 to-accent/5">
+      <BioSynthCard className="p-6 bg-gradient-to-br from-primary/10 to-accent/10 hud-panel circuit-overlay">
         <div className="text-center space-y-3">
-          <Sparkles className="mx-auto text-primary" size={32} />
-          <h3 className="text-xl font-bold">Real-World Challenges & AR Adventures</h3>
+          <CircuitBoard className="mx-auto text-primary animate-energy-pulse" size={32} />
+          <h3 className="text-xl font-bold holo-text">AR Field Operations & Bio-Scan Protocol</h3>
           <p className="text-muted-foreground text-sm">
-            Complete real environmental actions, use AR to scan objects, and join multiplayer quests with friends!
+            Execute real-world environmental missions, use AR bio-scanning, and join multiplayer system operations!
           </p>
           <Badge variant="outline" className="animate-pulse">
-            Coming Soon
+            System Update Pending
           </Badge>
         </div>
-      </ElementalCard>
+      </BioSynthCard>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background circuit-overlay">
       {currentView !== "home" && (
         <div className="p-4">
-          <ElementalButton 
-            element="forest" 
+          <BioSynthButton 
+            variant="bio-energy" 
             onClick={() => setCurrentView("home")}
           >
-            ← Back to Home
-          </ElementalButton>
+            ← Return to Command Center
+          </BioSynthButton>
         </div>
       )}
 
@@ -373,15 +370,15 @@ const Index = () => {
       {currentView === "home" && (
         <footer className="text-center py-8 text-muted-foreground">
           <p className="text-sm">
-            🌍 Together, we can restore Terra Nova and protect our real world! 🌱
+            🌐 System Integrity: Restoring Terra Nova's bio-synthetic ecosystem 🔋
           </p>
         </footer>
       )}
 
       {showEvolution && (
-        <AvatarEvolution
+        <BioModuleEvolution
           currentLevel={playerData.level}
-          availablePoints={playerData.evolutionPoints}
+          availablePoints={playerData.bioModulePoints}
           onEvolutionSelect={handleEvolutionSelect}
           onClose={() => setShowEvolution(false)}
         />
@@ -391,3 +388,10 @@ const Index = () => {
 };
 
 export default Index;
+
+
+
+
+
+
+
