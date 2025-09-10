@@ -2,19 +2,19 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { forwardRef } from "react";
 
-interface BioSynthButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "bio-energy" | "aether" | "geo-kinetic" | "hydro-core";
+interface TerraTotButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant: "sunny" | "sky" | "forest" | "sunset";
   children: React.ReactNode;
   glowing?: boolean;
 }
 
-const BioSynthButton = forwardRef<HTMLButtonElement, BioSynthButtonProps>(
+const BioSynthButton = forwardRef<HTMLButtonElement, TerraTotButtonProps>(
   ({ variant, children, glowing = false, className, ...props }, ref) => {
     const variantStyles = {
-      "bio-energy": "btn-bio-energy",
-      "aether": "btn-aether", 
-      "geo-kinetic": "btn-geo-kinetic",
-      "hydro-core": "btn-hydro-core"
+      "sunny": "btn-sunny",
+      "sky": "btn-sky", 
+      "forest": "btn-forest",
+      "sunset": "btn-sunset"
     };
 
     return (
@@ -22,8 +22,8 @@ const BioSynthButton = forwardRef<HTMLButtonElement, BioSynthButtonProps>(
         ref={ref}
         className={cn(
           variantStyles[variant],
-          glowing && "animate-energy-pulse",
-          "font-semibold text-lg px-8 py-6 rounded-2xl font-mono tracking-wide",
+          glowing && "animate-sparkle",
+          "font-bold text-lg px-8 py-6 rounded-3xl font-sans",
           className
         )}
         {...props}
