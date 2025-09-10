@@ -100,6 +100,17 @@ export const DecontaminateProtocol = ({ onGameComplete }: DecontaminateProtocolP
       setScore(s => s + points);
       setCleansedCount(c => c + 1);
       setCombo(c => c + 1);
+    // Update global tracking data
+    const globalData = {
+      gameType: "decontaminate",
+      points,
+      nodesCleared: cleansedCount,
+      playerId: "current-player"
+    };
+    
+    // In a real implementation, this would send data to a backend service
+    console.log("Global tracking data:", globalData);
+    
 
       toast({
         title: "Node Decontaminated! 🧹",
