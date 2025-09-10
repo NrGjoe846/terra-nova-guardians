@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { BioSynthCard } from "@/components/ui/BioSynthCard";
+import { BioSynthCard } from "@/components/BioSynthCard";
 import { BioSynthButton } from "@/components/ui/BioSynthButton";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
