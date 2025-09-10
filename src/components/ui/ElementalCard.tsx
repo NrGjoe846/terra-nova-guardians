@@ -2,21 +2,21 @@ import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { forwardRef } from "react";
 
-interface ElementalCardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface TerraTotCardProps extends React.HTMLAttributes<HTMLDivElement> {
   floating?: boolean;
   glowing?: boolean;
   children: React.ReactNode;
 }
 
-const ElementalCard = forwardRef<HTMLDivElement, ElementalCardProps>(
+const ElementalCard = forwardRef<HTMLDivElement, TerraTotCardProps>(
   ({ floating = false, glowing = false, className, children, ...props }, ref) => {
     return (
       <Card
         ref={ref}
         className={cn(
-          "card-elemental",
-          floating && "float-gentle",
-          glowing && "glow-elemental",
+          "card-terra-tots",
+          floating && "bounce-float",
+          glowing && "happy-glow",
           className
         )}
         {...props}
