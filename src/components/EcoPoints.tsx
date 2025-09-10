@@ -1,4 +1,4 @@
-import { Leaf } from "lucide-react";
+import { Zap } from "lucide-react";
 
 interface EcoPointsProps {
   points: number;
@@ -20,11 +20,11 @@ export const EcoPoints = ({ points, showLabel = true, size = "md" }: EcoPointsPr
   };
 
   return (
-    <div className="flex items-center gap-2 text-primary font-semibold">
-      <Leaf size={iconSizes[size]} className="text-primary animate-sparkle" />
+    <div className="flex items-center gap-2 text-primary font-semibold holo-text">
+      <Zap size={iconSizes[size]} className="text-primary animate-energy-pulse" />
       <span className={sizeClasses[size]}>
         {points.toLocaleString()}
-        {showLabel && " Eco-Points"}
+        {showLabel && " Bio-Credits"}
       </span>
     </div>
   );
