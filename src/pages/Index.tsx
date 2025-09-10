@@ -370,61 +370,58 @@ const Index = () => {
     <div className="space-y-8">
       <div className="text-center space-y-6">
         <div className="relative">
-          <h1 className="text-5xl font-bold bio-synth-title mb-4">
-            Terra Nova
+          <h1 className="text-6xl font-bold terra-tots-title mb-4">
+            🌱 Terra-Tots 🌱
           </h1>
-          <p className="text-2xl text-primary font-semibold holo-text">Bio-Synth Guardians</p>
-          <CircuitBoard className="absolute -top-2 -right-4 text-primary animate-energy-pulse" size={24} />
+          <p className="text-3xl text-primary font-bold cheerful-text">Nature's Little Helpers!</p>
+          <div className="absolute -top-2 -right-4 text-4xl animate-bounce">🌟</div>
+          <div className="absolute -top-2 -left-4 text-3xl animate-wiggle">🦋</div>
         </div>
         
         <div className="max-w-2xl mx-auto">
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Welcome to Terra Nova, a bio-synthetic world where four critical System Cores have gone offline. 
-            As a newly activated Bio-Synth Guardian, you must restore system integrity through decontamination protocols, 
-            data stream operations, and environmental system management!
+            Welcome to Terra-Tots Land, a magical place where nature needs your help! 🌍✨ 
+            Join our friendly animal guides and become a Nature Helper by playing fun games, 
+            learning about the environment, and helping make our world a cleaner, happier place! 🌈
           </p>
         </div>
 
-        <BioSynthCard floating className="max-w-md mx-auto p-6 hud-panel">
+        <BioSynthCard floating className="max-w-md mx-auto p-6 friendly-panel">
           <div className="space-y-4">
             <div className="relative">
-              <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center circuit-overlay">
-                <div className="text-8xl animate-holo-float">🤖</div>
+              <div className="w-full h-48 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl flex items-center justify-center nature-overlay">
+                <div className="text-8xl animate-bounce-float">👶</div>
               </div>
               <div className="absolute top-2 right-2">
-                <EcoDrone 
-                  type={playerData.element} 
-                  mood="curious" 
-                  size="sm"
-                  onClick={() => {
-                    toast({
-                      title: "Eco-Drone Status: Online 🤖",
-                      description: "Your AI companion is ready for system operations!",
-                    });
-                  }}
-                />
+                <div className="text-3xl animate-dance">🐿️</div>
+              </div>
+              <div className="absolute bottom-2 left-2">
+                <div className="text-2xl animate-wiggle">🌸</div>
+              </div>
+              <div className="absolute top-2 left-2">
+                <div className="text-2xl animate-sparkle">✨</div>
               </div>
               {playerData.bioModulePoints > 0 && (
-                <div className="absolute top-2 left-2">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                   <button
                     onClick={() => setShowEvolution(true)}
-                    className="bg-primary text-primary-foreground rounded-full p-2 animate-energy-pulse hover:scale-110 transition-transform neon-glow"
+                    className="bg-primary text-primary-foreground rounded-full p-3 animate-bounce hover:scale-110 transition-transform happy-glow text-2xl"
                   >
-                    <Cpu size={16} />
+                    🎁
                   </button>
                 </div>
               )}
             </div>
             <div className="space-y-2">
-              <h3 className="text-xl font-bold">{playerData.name}</h3>
-              <Badge variant="secondary" className="capitalize">
-                {playerData.element} Specialist
+              <h3 className="text-2xl font-bold cheerful-text">{playerData.name}</h3>
+              <Badge variant="secondary" className="text-lg px-4 py-2 rounded-full bg-gradient-nature text-white font-bold">
+                🌟 Level {playerData.level} Helper 🌟
               </Badge>
               <LevelProgress 
                 currentLevel={playerData.level}
                 currentXP={playerData.xp}
                 xpForNextLevel={playerData.xpForNext}
-                element={playerData.element}
+                element="sunny"
               />
             </div>
           </div>
@@ -432,32 +429,32 @@ const Index = () => {
       </div>
 
       <div className="grid md:grid-cols-4 gap-6">
-        <BioSynthCard className="p-6 text-center hud-panel">
-          <Globe className="mx-auto text-primary mb-2 animate-circuit-pulse" size={32} />
-          <h3 className="font-bold text-lg holo-text">System Impact</h3>
+        <BioSynthCard className="p-6 text-center friendly-panel">
+          <div className="text-4xl mb-2 animate-sparkle">🌍</div>
+          <h3 className="font-bold text-lg cheerful-text">Helper Points</h3>
           <EcoPoints points={playerData.bioCredits} size="lg" />
         </BioSynthCard>
 
-        <BioSynthCard className="p-6 text-center hud-panel">
-          <Zap className="mx-auto text-accent mb-2 animate-circuit-pulse" size={32} />
-          <h3 className="font-bold text-lg holo-text">Sectors Online</h3>
-          <p className="text-2xl font-bold text-accent">
+        <BioSynthCard className="p-6 text-center friendly-panel">
+          <div className="text-4xl mb-2 animate-wiggle">🏡</div>
+          <h3 className="font-bold text-lg cheerful-text">Areas Helped</h3>
+          <p className="text-3xl font-bold text-accent">
             {playerData.regionsUnlocked} / {regions.length}
           </p>
         </BioSynthCard>
 
-        <BioSynthCard className="p-6 text-center hud-panel">
-          <Users className="mx-auto text-river mb-2 animate-circuit-pulse" size={32} />
-          <h3 className="font-bold text-lg holo-text">Guardian Rank</h3>
-          <p className="text-2xl font-bold text-river">
+        <BioSynthCard className="p-6 text-center friendly-panel">
+          <div className="text-4xl mb-2 animate-bounce">🏆</div>
+          <h3 className="font-bold text-lg cheerful-text">Helper Level</h3>
+          <p className="text-3xl font-bold text-river">
             Level {playerData.level}
           </p>
         </BioSynthCard>
 
-        <BioSynthCard className="p-6 text-center hud-panel">
-          <CircuitBoard className="mx-auto text-orange-500 mb-2 animate-circuit-pulse" size={32} />
-          <h3 className="font-bold text-lg holo-text">System Uptime</h3>
-          <p className="text-2xl font-bold text-orange-500">
+        <BioSynthCard className="p-6 text-center friendly-panel">
+          <div className="text-4xl mb-2 animate-dance">📅</div>
+          <h3 className="font-bold text-lg cheerful-text">Daily Streak</h3>
+          <p className="text-3xl font-bold text-orange-500">
             {playerData.dailyStreak} Days
           </p>
         </BioSynthCard>
