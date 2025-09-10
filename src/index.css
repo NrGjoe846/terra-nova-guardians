@@ -2,129 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Terra-Tots: Nature's Little Helpers Design System
-Bright, cheerful, kid-friendly theme with whimsical nature elements.
+/* Eco-Guardians Design System - Terra Nova inspired colors and effects
 All colors MUST be HSL for proper theming.
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans:wght@400&family=Fredoka+One:wght@400&family=Comic+Neue:wght@300;400;700&display=swap');
-
 @layer base {
   :root {
-    /* Terra-Tots bright and cheerful palette */
-    --background: 120 40% 95%;
-    --foreground: 25 30% 25%;
+    /* Core Terra Nova palette */
+    --background: 120 25% 98%;
+    --foreground: 150 25% 15%;
 
-    /* Whimsical cards with soft textures */
-    --card: 60 50% 98%;
-    --card-foreground: 25 30% 25%;
+    /* Elemental nature cards */
+    --card: 120 30% 97%;
+    --card-foreground: 150 25% 15%;
 
-    --popover: 60 50% 98%;
-    --popover-foreground: 25 30% 25%;
+    --popover: 120 30% 97%;
+    --popover-foreground: 150 25% 15%;
 
-    /* Primary Sunny Yellow (cheerful sun) */
-    --primary: 45 100% 60%;
-    --primary-foreground: 25 30% 25%;
-    --primary-glow: 45 100% 70%;
+    /* Forest Guardian primary (emerald green) */
+    --primary: 150 75% 35%;
+    --primary-foreground: 120 25% 98%;
+    --primary-glow: 150 60% 50%;
 
-    /* Secondary Sky Blue (friendly sky) */
-    --secondary: 200 80% 65%;
-    --secondary-foreground: 25 30% 25%;
+    /* Mountain Guardian secondary (earth brown) */
+    --secondary: 25 35% 45%;
+    --secondary-foreground: 120 25% 98%;
 
-    /* Muted soft greens */
-    --muted: 120 30% 90%;
-    --muted-foreground: 25 20% 45%;
+    /* Subtle nature tones */
+    --muted: 120 20% 92%;
+    --muted-foreground: 150 15% 40%;
 
-    /* Accent Lush Green (happy trees) */
-    --accent: 140 60% 55%;
-    --accent-foreground: 25 30% 25%;
+    /* Sky Guardian accent (celestial blue) */
+    --accent: 200 75% 55%;
+    --accent-foreground: 120 25% 98%;
 
-    /* River Friendly Orange (warm sunset) */
-    --river: 25 85% 65%;
-    --river-foreground: 25 30% 25%;
+    /* River Guardian (ocean blue) */
+    --river: 210 85% 45%;
+    --river-foreground: 120 25% 98%;
 
-    /* System Error/Warning (soft red) */
-    --destructive: 0 60% 70%;
-    --destructive-foreground: 25 30% 25%;
+    /* Danger/Shadow Blight */
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 120 25% 98%;
 
     /* UI elements */
-    --border: 120 25% 80%;
-    --input: 60 30% 95%;
-    --ring: 45 100% 60%;
+    --border: 120 20% 85%;
+    --input: 120 20% 90%;
+    --ring: 150 75% 35%;
 
-    --radius: 1.5rem;
+    --radius: 1rem;
 
-    /* Terra-Tots magical gradients */
-    --gradient-sunny: linear-gradient(135deg, hsl(var(--primary)), hsl(45 90% 75%));
-    --gradient-sky: linear-gradient(135deg, hsl(var(--secondary)), hsl(200 70% 80%));
-    --gradient-forest: linear-gradient(135deg, hsl(var(--accent)), hsl(140 50% 70%));
-    --gradient-sunset: linear-gradient(135deg, hsl(var(--river)), hsl(25 75% 80%));
-    --gradient-nature: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--primary)));
+    /* Terra Nova magical gradients */
+    --gradient-forest: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-sky: linear-gradient(135deg, hsl(var(--accent)), hsl(200 60% 70%));
+    --gradient-earth: linear-gradient(135deg, hsl(var(--secondary)), hsl(35 45% 55%));
+    --gradient-river: linear-gradient(135deg, hsl(var(--river)), hsl(210 70% 60%));
+    --gradient-terra: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
 
-    /* Whimsical shadows and glows */
-    --shadow-sunny: 0 0 20px hsl(var(--primary) / 0.3);
-    --shadow-sky: 0 0 20px hsl(var(--secondary) / 0.3);
-    --shadow-forest: 0 0 20px hsl(var(--accent) / 0.3);
-    --glow-happy: 0 0 15px hsl(var(--primary) / 0.6);
-    --glow-nature: 0 0 12px hsl(var(--accent) / 0.5);
+    /* Elemental shadows and glows */
+    --shadow-forest: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-sky: 0 10px 30px -10px hsl(var(--accent) / 0.3);
+    --shadow-magical: 0 0 40px hsl(var(--primary-glow) / 0.4);
+    --glow-elemental: 0 0 20px hsl(var(--primary) / 0.5);
 
-    /* Playful animations */
-    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --transition-wiggle: all 0.4s ease-in-out;
+    /* Smooth nature animations */
+    --transition-nature: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-float: transform 0.3s ease-in-out;
 
-    --sidebar-background: 120 40% 92%;
-    --sidebar-foreground: 25 30% 25%;
-    --sidebar-primary: 45 100% 60%;
-    --sidebar-primary-foreground: 25 30% 25%;
-    --sidebar-accent: 120 30% 88%;
-    --sidebar-accent-foreground: 25 30% 25%;
-    --sidebar-border: 120 25% 80%;
-    --sidebar-ring: 45 100% 60%;
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    /* Gentle dark mode for Terra-Tots (evening garden) */
-    --background: 240 15% 15%;
-    --foreground: 45 40% 90%;
+    /* Dark Terra Nova - mysterious night forest */
+    --background: 150 20% 8%;
+    --foreground: 120 25% 90%;
 
-    --card: 240 10% 18%;
-    --card-foreground: 45 40% 90%;
+    --card: 150 25% 10%;
+    --card-foreground: 120 25% 90%;
 
-    --popover: 240 10% 18%;
-    --popover-foreground: 45 40% 90%;
+    --popover: 150 25% 10%;
+    --popover-foreground: 120 25% 90%;
 
-    /* Softer colors for dark mode */
-    --primary: 45 90% 70%;
-    --primary-foreground: 240 15% 15%;
-    --primary-glow: 45 90% 80%;
+    /* Glowing forest primary in dark */
+    --primary: 150 65% 55%;
+    --primary-foreground: 150 20% 8%;
+    --primary-glow: 150 75% 65%;
 
-    --secondary: 200 70% 70%;
-    --secondary-foreground: 240 15% 15%;
+    /* Dark mountain secondary */
+    --secondary: 25 25% 25%;
+    --secondary-foreground: 120 25% 90%;
 
-    --muted: 240 10% 22%;
-    --muted-foreground: 45 20% 70%;
+    /* Dark muted tones */
+    --muted: 150 15% 15%;
+    --muted-foreground: 120 15% 65%;
 
-    --accent: 140 50% 65%;
-    --accent-foreground: 240 15% 15%;
+    /* Glowing sky accent */
+    --accent: 200 70% 60%;
+    --accent-foreground: 150 20% 8%;
 
-    --river: 25 75% 70%;
-    --river-foreground: 240 15% 15%;
+    /* Dark river */
+    --river: 210 80% 50%;
+    --river-foreground: 150 20% 8%;
 
-    --destructive: 0 50% 75%;
-    --destructive-foreground: 240 15% 15%;
+    /* Shadow Blight in dark */
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 120 25% 90%;
 
-    --border: 240 10% 25%;
-    --input: 240 10% 20%;
-    --ring: 45 90% 70%;
-
-    --sidebar-background: 240 15% 12%;
-    --sidebar-foreground: 45 40% 85%;
-    --sidebar-primary: 45 90% 70%;
-    --sidebar-primary-foreground: 240 15% 12%;
-    --sidebar-accent: 240 10% 18%;
-    --sidebar-accent-foreground: 45 40% 85%;
-    --sidebar-border: 240 10% 25%;
-    --sidebar-ring: 45 90% 70%;
+    /* Dark UI elements */
+    --border: 150 20% 20%;
+    --input: 150 20% 15%;
+    --ring: 150 65% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -134,33 +142,14 @@ All colors MUST be HSL for proper theming.
   }
 
   body {
-    @apply bg-background text-foreground;
-    font-family: 'Comic Neue', 'Bubblegum Sans', cursive;
-    background: radial-gradient(ellipse at center, hsl(120 50% 97%) 0%, hsl(120 40% 95%) 100%);
+    @apply bg-background text-foreground font-sans;
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(120 20% 95%));
     min-height: 100vh;
-    position: relative;
   }
 
-  /* Whimsical nature pattern background */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(circle at 20% 20%, hsl(var(--accent) / 0.05) 2px, transparent 2px),
-      radial-gradient(circle at 80% 80%, hsl(var(--primary) / 0.05) 2px, transparent 2px),
-      radial-gradient(circle at 40% 60%, hsl(var(--secondary) / 0.05) 1px, transparent 1px);
-    background-size: 60px 60px, 80px 80px, 40px 40px;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Cheerful scrollbar */
+  /* Magical scrollbar for Terra Nova */
   ::-webkit-scrollbar {
-    width: 12px;
+    width: 8px;
   }
   
   ::-webkit-scrollbar-track {
@@ -168,296 +157,68 @@ All colors MUST be HSL for proper theming.
   }
   
   ::-webkit-scrollbar-thumb {
-    background: var(--gradient-nature);
+    background: var(--gradient-forest);
     @apply rounded-full;
-    box-shadow: var(--glow-nature);
-  }
-
-  /* Kid-friendly typography */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fredoka One', 'Bubblegum Sans', cursive;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-  }
-
-  .terra-tots-title {
-    font-family: 'Fredoka One', cursive;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    text-transform: none;
-    background: var(--gradient-nature);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 2px 4px hsl(var(--primary) / 0.3));
-    text-shadow: 2px 2px 0px hsl(var(--background)), -2px -2px 0px hsl(var(--background)), 2px -2px 0px hsl(var(--background)), -2px 2px 0px hsl(var(--background));
   }
 }
 
 @layer components {
-  /* Terra-Tots button variants */
-  .btn-sunny {
-    background: var(--gradient-sunny);
+  /* Elemental button variants */
+  .btn-forest {
+    background: var(--gradient-forest);
     @apply text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
-    box-shadow: var(--shadow-sunny);
-    border: 2px solid hsl(var(--primary) / 0.4);
-    position: relative;
-    overflow: hidden;
-    border-radius: 2rem;
-  }
-
-  .btn-sunny::before {
-    content: '🌟';
-    position: absolute;
-    top: 50%;
-    left: -30px;
-    transform: translateY(-50%);
-    font-size: 1.2em;
-    transition: left 0.5s ease;
-  }
-
-  .btn-sunny:hover::before {
-    left: calc(100% + 10px);
+    box-shadow: var(--shadow-forest);
   }
 
   .btn-sky {
     background: var(--gradient-sky);
-    @apply text-secondary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
-    box-shadow: var(--shadow-sky);
-    border: 2px solid hsl(var(--secondary) / 0.4);
-    border-radius: 2rem;
-  }
-
-  .btn-forest {
-    background: var(--gradient-forest);
     @apply text-accent-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
-    box-shadow: var(--shadow-forest);
-    border: 2px solid hsl(var(--accent) / 0.4);
-    border-radius: 2rem;
+    box-shadow: var(--shadow-sky);
   }
 
-  .btn-sunset {
-    background: var(--gradient-sunset);
+  .btn-earth {
+    background: var(--gradient-earth);
+    @apply text-secondary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+
+  .btn-river {
+    background: var(--gradient-river);
     @apply text-river-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
-    box-shadow: 0 0 20px hsl(var(--river) / 0.3);
-    border: 2px solid hsl(var(--river) / 0.4);
-    border-radius: 2rem;
   }
 
-  /* Bouncy floating animation */
-  .bounce-float {
-    animation: bounceFloat 3s ease-in-out infinite;
+  /* Magical floating animation */
+  .float-gentle {
+    animation: float 3s ease-in-out infinite;
   }
 
-  .happy-glow {
-    box-shadow: var(--glow-happy);
-    border: 2px solid hsl(var(--primary) / 0.6);
+  .glow-elemental {
+    box-shadow: var(--glow-elemental);
   }
 
-  /* Terra-Tots card styles */
-  .card-terra-tots {
-    @apply bg-card/95 backdrop-blur-sm border-2 border-border/60 rounded-3xl;
-    box-shadow: var(--shadow-sunny);
-    transition: var(--transition-bounce);
-    position: relative;
-    overflow: hidden;
+  /* Terra Nova card styles */
+  .card-elemental {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl;
+    box-shadow: var(--shadow-forest);
+    transition: var(--transition-nature);
   }
 
-  .card-terra-tots::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-nature);
-    opacity: 0.8;
-    border-radius: 1.5rem 1.5rem 0 0;
-  }
-
-  .card-terra-tots:hover {
+  .card-elemental:hover {
     @apply transform scale-105;
-    box-shadow: var(--glow-happy);
-    border-color: hsl(var(--primary) / 0.8);
-  }
-
-  /* Friendly panels */
-  .friendly-panel {
-    @apply bg-card/90 backdrop-blur-md border-2 border-primary/40 rounded-2xl;
-    box-shadow: 
-      inset 0 2px 0 hsl(var(--primary) / 0.2),
-      0 0 15px hsl(var(--primary) / 0.15);
-    position: relative;
-  }
-
-  .friendly-panel::after {
-    content: '😊';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    font-size: 1.2em;
-    animation: wiggle 2s infinite;
-  }
-
-  /* Nature pattern overlay */
-  .nature-overlay {
-    position: relative;
-  }
-
-  .nature-overlay::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      radial-gradient(circle at 25% 25%, hsl(var(--accent) / 0.1) 3px, transparent 3px),
-      radial-gradient(circle at 75% 75%, hsl(var(--primary) / 0.1) 2px, transparent 2px);
-    background-size: 50px 50px, 30px 30px;
-    pointer-events: none;
-    opacity: 0.4;
-  }
-
-  /* Happy stream effect */
-  .happy-stream {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .happy-stream::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-      transparent, 
-      hsl(var(--primary) / 0.2), 
-      hsl(var(--accent) / 0.2), 
-      hsl(var(--primary) / 0.2), 
-      transparent
-    );
-    animation: happyFlow 4s linear infinite;
-  }
-
-  /* Cheerful text effect */
-  .cheerful-text {
-    color: hsl(var(--primary));
-    text-shadow: 
-      2px 2px 0px hsl(var(--background)),
-      -2px -2px 0px hsl(var(--background)),
-      2px -2px 0px hsl(var(--background)),
-      -2px 2px 0px hsl(var(--background)),
-      0 0 10px hsl(var(--primary) / 0.5);
-    font-family: 'Fredoka One', cursive;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-  }
-
-  /* Status indicators */
-  .status-happy {
-    color: hsl(var(--accent));
-    text-shadow: 0 0 8px hsl(var(--accent) / 0.6);
-  }
-
-  .status-excited {
-    color: hsl(var(--primary));
-    text-shadow: 0 0 8px hsl(var(--primary) / 0.6);
-  }
-
-  .status-sleepy {
-    color: hsl(var(--secondary));
-    text-shadow: 0 0 8px hsl(var(--secondary) / 0.6);
+    box-shadow: var(--shadow-magical);
   }
 }
 
-@keyframes bounceFloat {
-  0%, 100% { transform: translateY(0px) scale(1); }
-  25% { transform: translateY(-10px) scale(1.02); }
-  50% { transform: translateY(-5px) scale(1); }
-  75% { transform: translateY(-15px) scale(0.98); }
-}
-
-@keyframes happyFlow {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-5deg); }
-  75% { transform: rotate(5deg); }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes sparkle {
-  0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1.3) rotate(180deg); }
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes grow {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes dance {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-5px) rotate(-5deg); }
-  75% { transform: translateX(5px) rotate(5deg); }
-}
-
-@keyframes rainbow {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-
-/* Enhanced animations for Terra-Tots theme */
-.animate-bounce-float {
-  animation: bounceFloat 3s ease-in-out infinite;
-}
-
-.animate-happy-flow {
-  animation: happyFlow 4s linear infinite;
-}
-
-.animate-wiggle {
-  animation: wiggle 2s ease-in-out infinite;
-}
-
-.animate-sparkle {
-  animation: sparkle 2s ease-in-out infinite;
-}
-
-.animate-grow {
-  animation: grow 0.6s ease-out;
-}
-
-.animate-dance {
-  animation: dance 1s ease-in-out infinite;
-}
-
-.animate-rainbow {
-  animation: rainbow 3s linear infinite;
-}
-
-/* Responsive Terra-Tots design */
-@media (max-width: 768px) {
-  .terra-tots-title {
-    font-size: 2.5rem;
-  }
-  
-  .card-terra-tots {
-    @apply rounded-2xl;
-  }
-  
-  .friendly-panel {
-    @apply rounded-xl;
-  }
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: var(--glow-elemental); }
+  50% { box-shadow: 0 0 30px hsl(var(--primary) / 0.8); }
 }

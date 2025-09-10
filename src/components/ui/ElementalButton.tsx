@@ -2,19 +2,19 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { forwardRef } from "react";
 
-interface TerraTotButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  element: "sunny" | "sky" | "forest" | "sunset";
+interface ElementalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  element: "forest" | "sky" | "earth" | "river";
   children: React.ReactNode;
   glowing?: boolean;
 }
 
-const ElementalButton = forwardRef<HTMLButtonElement, TerraTotButtonProps>(
+const ElementalButton = forwardRef<HTMLButtonElement, ElementalButtonProps>(
   ({ element, children, glowing = false, className, ...props }, ref) => {
     const elementStyles = {
-      sunny: "btn-sunny",
-      sky: "btn-sky", 
       forest: "btn-forest",
-      sunset: "btn-sunset"
+      sky: "btn-sky", 
+      earth: "btn-earth",
+      river: "btn-river"
     };
 
     return (
@@ -22,8 +22,8 @@ const ElementalButton = forwardRef<HTMLButtonElement, TerraTotButtonProps>(
         ref={ref}
         className={cn(
           elementStyles[element],
-          glowing && "animate-sparkle",
-          "font-bold text-lg px-8 py-6 rounded-3xl font-sans",
+          glowing && "animate-pulse-glow",
+          "font-semibold text-lg px-8 py-6 rounded-2xl",
           className
         )}
         {...props}

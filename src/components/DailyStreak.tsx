@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { cn } from "@/lib/utils";
 import { ElementalCard } from "@/components/ui/ElementalCard";
 import { ElementalButton } from "@/components/ui/ElementalButton";
 import { Badge } from "@/components/ui/badge";
