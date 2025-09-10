@@ -2,41 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Eco-Guardians Design System - Terra Nova inspired colors and effects
+All colors MUST be HSL for proper theming.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Terra Nova palette */
+    --background: 120 25% 98%;
+    --foreground: 150 25% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Elemental nature cards */
+    --card: 120 30% 97%;
+    --card-foreground: 150 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 120 30% 97%;
+    --popover-foreground: 150 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Forest Guardian primary (emerald green) */
+    --primary: 150 75% 35%;
+    --primary-foreground: 120 25% 98%;
+    --primary-glow: 150 60% 50%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Mountain Guardian secondary (earth brown) */
+    --secondary: 25 35% 45%;
+    --secondary-foreground: 120 25% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Subtle nature tones */
+    --muted: 120 20% 92%;
+    --muted-foreground: 150 15% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Sky Guardian accent (celestial blue) */
+    --accent: 200 75% 55%;
+    --accent-foreground: 120 25% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* River Guardian (ocean blue) */
+    --river: 210 85% 45%;
+    --river-foreground: 120 25% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Danger/Shadow Blight */
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 120 25% 98%;
 
-    --radius: 0.5rem;
+    /* UI elements */
+    --border: 120 20% 85%;
+    --input: 120 20% 90%;
+    --ring: 150 75% 35%;
+
+    --radius: 1rem;
+
+    /* Terra Nova magical gradients */
+    --gradient-forest: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-sky: linear-gradient(135deg, hsl(var(--accent)), hsl(200 60% 70%));
+    --gradient-earth: linear-gradient(135deg, hsl(var(--secondary)), hsl(35 45% 55%));
+    --gradient-river: linear-gradient(135deg, hsl(var(--river)), hsl(210 70% 60%));
+    --gradient-terra: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+
+    /* Elemental shadows and glows */
+    --shadow-forest: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-sky: 0 10px 30px -10px hsl(var(--accent) / 0.3);
+    --shadow-magical: 0 0 40px hsl(var(--primary-glow) / 0.4);
+    --glow-elemental: 0 0 20px hsl(var(--primary) / 0.5);
+
+    /* Smooth nature animations */
+    --transition-nature: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-float: transform 0.3s ease-in-out;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +86,45 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark Terra Nova - mysterious night forest */
+    --background: 150 20% 8%;
+    --foreground: 120 25% 90%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 150 25% 10%;
+    --card-foreground: 120 25% 90%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 150 25% 10%;
+    --popover-foreground: 120 25% 90%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Glowing forest primary in dark */
+    --primary: 150 65% 55%;
+    --primary-foreground: 150 20% 8%;
+    --primary-glow: 150 75% 65%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Dark mountain secondary */
+    --secondary: 25 25% 25%;
+    --secondary-foreground: 120 25% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Dark muted tones */
+    --muted: 150 15% 15%;
+    --muted-foreground: 120 15% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Glowing sky accent */
+    --accent: 200 70% 60%;
+    --accent-foreground: 150 20% 8%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    /* Dark river */
+    --river: 210 80% 50%;
+    --river-foreground: 150 20% 8%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Shadow Blight in dark */
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 120 25% 90%;
+
+    /* Dark UI elements */
+    --border: 150 20% 20%;
+    --input: 150 20% 15%;
+    --ring: 150 65% 55%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +142,83 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(120 20% 95%));
+    min-height: 100vh;
   }
+
+  /* Magical scrollbar for Terra Nova */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--gradient-forest);
+    @apply rounded-full;
+  }
+}
+
+@layer components {
+  /* Elemental button variants */
+  .btn-forest {
+    background: var(--gradient-forest);
+    @apply text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+    box-shadow: var(--shadow-forest);
+  }
+
+  .btn-sky {
+    background: var(--gradient-sky);
+    @apply text-accent-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+    box-shadow: var(--shadow-sky);
+  }
+
+  .btn-earth {
+    background: var(--gradient-earth);
+    @apply text-secondary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+
+  .btn-river {
+    background: var(--gradient-river);
+    @apply text-river-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
+  }
+
+  /* Magical floating animation */
+  .float-gentle {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .glow-elemental {
+    box-shadow: var(--glow-elemental);
+  }
+
+  /* Terra Nova card styles */
+  .card-elemental {
+    @apply bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl;
+    box-shadow: var(--shadow-forest);
+    transition: var(--transition-nature);
+  }
+
+  .card-elemental:hover {
+    @apply transform scale-105;
+    box-shadow: var(--shadow-magical);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: var(--glow-elemental); }
+  50% { box-shadow: 0 0 30px hsl(var(--primary) / 0.8); }
 }
