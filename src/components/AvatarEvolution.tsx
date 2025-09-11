@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { AvatarCompanion } from "@/components/AvatarCompanion";
 import { Sparkles, Zap, Leaf, Droplets, Mountain } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface EvolutionOption {
   id: string;

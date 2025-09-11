@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ElementalCard } from "@/components/ui/ElementalCard";
 import { ElementalButton } from "@/components/ui/ElementalButton";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { EcoPoints } from "@/components/EcoPoints";
 import { LevelProgress } from "@/components/LevelProgress";
 import { TerraNovaMap } from "@/components/TerraNovaMap";
@@ -15,6 +16,7 @@ import { EcoSanctuary } from "@/components/EcoSanctuary";
 import { Sparkles, Globe, TreePine, Users, BookOpen, Gamepad2, Home, Zap, Trophy, Package } from "lucide-react";
 import guardianImage from "@/assets/elemental-guardians.jpg";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<"home" | "map" | "game" | "quiz" | "pollution" | "sanctuary" | "evolution">("home");

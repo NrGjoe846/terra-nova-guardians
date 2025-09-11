@@ -4,6 +4,7 @@ import { ElementalButton } from "@/components/ui/ElementalButton";
 import { Badge } from "@/components/ui/badge";
 import { AvatarCompanion } from "@/components/AvatarCompanion";
 import { Home, TreePine, Sparkles, Plus } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface SanctuaryItem {
   id: string;

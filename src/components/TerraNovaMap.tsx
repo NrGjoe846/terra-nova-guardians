@@ -1,8 +1,10 @@
 import { ElementalCard } from "@/components/ui/ElementalCard";
 import { ElementalButton } from "@/components/ui/ElementalButton";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { MapPin, Lock } from "lucide-react";
 import terranovaImage from "@/assets/terra-nova-map.jpg";
+import { cn } from "@/lib/utils";
 
 interface Region {
   id: string;
