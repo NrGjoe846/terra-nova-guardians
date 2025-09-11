@@ -44,76 +44,83 @@ export const TerraNovaMap = ({ regions, onRegionSelect }: TerraNovaMapProps) => 
 
         {/* Interactive Region Markers */}
         <div className="absolute inset-0 p-8">
-          {regions.map((region, index) => (
-            <div
-              key={region.id}
-              className={`absolute transform -translate-x-1/2 -translate-y-1/2 ${getRegionPosition(index)}`}
-            >
-              <ElementalCard 
-                floating={region.unlocked}
-                glowing={region.unlocked && region.progress < 100}
-                className={cn(
-                  "p-4 min-w-[220px] max-w-[280px] animate-scale-in backdrop-blur-sm",
-                  region.unlocked ? "bg-card/90" : "bg-card/70"
-                )}
-                style={{ animationDelay: `${index * 200}ms` }}
+          {regions.map((region, index) => {
+            const position = getRegionPosition(index);
+            return (
+              <div
+                key={region.id}
+                className={`absolute ${position.classes}`}
+                style={{
+                  transform: `translate(${position.translate})`,
+                  zIndex: region.unlocked ? 20 : 10
+                }}
               >
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className={cn(
-                      "p-2 rounded-full",
-                      region.unlocked ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-                    )}>
-                      {region.unlocked ? (
-                        <MapPin size={20} />
-                      ) : (
-                        <Lock size={20} />
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg">{region.name}</h3>
-                      <Badge variant={region.unlocked ? "secondary" : "outline"} className="text-xs">
-                        {getElementEmoji(region.element)} {region.element}
-                      </Badge>
-                    </div>
-                  </div>
-                  
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {region.description}
-                  </p>
-
-                  {region.unlocked && (
-                    <div className="space-y-3">
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center text-sm">
-                          <span className="text-muted-foreground">Restoration Progress</span>
-                          <span className="font-semibold">{region.progress}%</span>
-                        </div>
-                        <Progress value={region.progress} className="h-2" />
+                <ElementalCard 
+                  floating={region.unlocked}
+                  glowing={region.unlocked && region.progress < 100}
+                  className={cn(
+                    "p-4 w-64 max-w-[280px] animate-scale-in backdrop-blur-sm shadow-xl",
+                    region.unlocked ? "bg-card/95 border-2 border-primary/20" : "bg-card/80 border border-border/50"
+                  )}
+                  style={{ animationDelay: `${index * 300}ms` }}
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className={cn(
+                        "p-2 rounded-full",
+                        region.unlocked ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+                      )}>
+                        {region.unlocked ? (
+                          <MapPin size={20} />
+                        ) : (
+                          <Lock size={20} />
+                        )}
                       </div>
-                      
-                      <ElementalButton
-                        element={region.element}
-                        onClick={() => onRegionSelect(region.id)}
-                        className="w-full text-sm py-2"
-                        glowing={region.progress < 100}
-                      >
-                        {region.progress === 100 ? "✅ Completed" : "🚀 Enter Region"}
-                      </ElementalButton>
+                      <div>
+                        <h3 className="font-bold text-lg">{region.name}</h3>
+                        <Badge variant={region.unlocked ? "secondary" : "outline"} className="text-xs">
+                          {getElementEmoji(region.element)} {region.element}
+                        </Badge>
+                      </div>
                     </div>
-                  )}
+                    
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {region.description}
+                    </p>
 
-                  {!region.unlocked && (
-                    <div className="text-center py-2">
-                      <Badge variant="outline" className="opacity-70">
-                        🔒 Complete previous regions to unlock
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-              </ElementalCard>
-            </div>
-          ))}
+                    {region.unlocked && (
+                      <div className="space-y-3">
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center text-sm">
+                            <span className="text-muted-foreground">Restoration Progress</span>
+                            <span className="font-semibold">{region.progress}%</span>
+                          </div>
+                          <Progress value={region.progress} className="h-2" />
+                        </div>
+                        
+                        <ElementalButton
+                          element={region.element}
+                          onClick={() => onRegionSelect(region.id)}
+                          className="w-full text-sm py-2"
+                          glowing={region.progress < 100}
+                        >
+                          {region.progress === 100 ? "✅ Completed" : "🚀 Enter Region"}
+                        </ElementalButton>
+                      </div>
+                    )}
+
+                    {!region.unlocked && (
+                      <div className="text-center py-2">
+                        <Badge variant="outline" className="opacity-70">
+                          🔒 Complete previous regions to unlock
+                        </Badge>
+                      </div>
+                    )}
+                  </div>
+                </ElementalCard>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -147,13 +154,13 @@ const getElementEmoji = (element: string) => {
   }
 };
 
-// Helper function to position regions on the map
+// Helper function to position regions on the map with better spacing
 const getRegionPosition = (index: number) => {
   const positions = [
-    "top-[30%] left-[25%]",     // Forest region - Withered Forest
-    "top-[20%] right-[20%]",    // Sky region - Clouded Peaks
-    "bottom-[35%] left-[30%]",  // Earth region - Silent Mountains
-    "bottom-[25%] right-[25%]", // River region - Dried Rivers
+    { classes: "top-[25%] left-[15%]", translate: "-50%, -50%" },     // Forest region - Withered Forest (top-left)
+    { classes: "top-[15%] right-[15%]", translate: "50%, -50%" },     // Sky region - Clouded Peaks (top-right) 
+    { classes: "bottom-[25%] left-[15%]", translate: "-50%, 50%" },   // Earth region - Silent Mountains (bottom-left)
+    { classes: "bottom-[15%] right-[15%]", translate: "50%, 50%" },   // River region - Dried Rivers (bottom-right)
   ];
-  return positions[index] || "top-1/2 left-1/2";
+  return positions[index] || { classes: "top-1/2 left-1/2", translate: "-50%, -50%" };
 };
