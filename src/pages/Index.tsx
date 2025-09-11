@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ElementalCard } from "@/components/ui/ElementalCard";
-import { ElementalButton } from "@/components/ui/ElaementalButton";
+import { ElementalButton } from "@/components/ui/ElementalButton";
 import { Badge } from "@/components/ui/badge";
 import { EcoPoints } from "@/components/EcoPoints";
 import { LevelProgress } from "@/components/LevelProgress";
