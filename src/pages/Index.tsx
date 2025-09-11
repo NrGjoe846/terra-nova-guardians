@@ -13,13 +13,18 @@ import { AvatarEvolution } from "@/components/AvatarEvolution";
 import { DailyStreak } from "@/components/DailyStreak";
 import { PollutionPurgeGame } from "@/components/PollutionPurgeGame";
 import { EcoSanctuary } from "@/components/EcoSanctuary";
-import { Sparkles, Globe, TreePine, Users, BookOpen, Gamepad2, Home, Zap, Trophy, Package } from "lucide-react";
+import { WaterConservationGame } from "@/components/WaterConservationGame";
+import { EnergyEfficiencyGame } from "@/components/EnergyEfficiencyGame";
+import { WildlifeProtectionGame } from "@/components/WildlifeProtectionGame";
+import { CarbonFootprintGame } from "@/components/CarbonFootprintGame";
+import { InteractiveBackground } from "@/components/InteractiveBackground";
+import { Sparkles, Globe, TreePine, Users, BookOpen, Gamepad2, Home, Zap, Trophy, Package, Droplets, Shield, Leaf } from "lucide-react";
 import guardianImage from "@/assets/elemental-guardians.jpg";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
 const Index = () => {
-  const [currentView, setCurrentView] = useState<"home" | "map" | "game" | "quiz" | "pollution" | "sanctuary" | "evolution">("home");
+  const [currentView, setCurrentView] = useState<"home" | "map" | "game" | "quiz" | "pollution" | "sanctuary" | "evolution" | "water" | "energy" | "wildlife" | "carbon">("home");
   const [showEvolution, setShowEvolution] = useState(false);
   const [playerData, setPlayerData] = useState({
     name: "New Guardian",
@@ -129,6 +134,14 @@ const Index = () => {
         return <EcoQuiz onQuizComplete={handleActivityComplete} />;
       case "pollution":
         return <PollutionPurgeGame onGameComplete={handleActivityComplete} />;
+      case "water":
+        return <WaterConservationGame onGameComplete={handleActivityComplete} />;
+      case "energy":
+        return <EnergyEfficiencyGame onGameComplete={handleActivityComplete} />;
+      case "wildlife":
+        return <WildlifeProtectionGame onGameComplete={handleActivityComplete} />;
+      case "carbon":
+        return <CarbonFootprintGame onGameComplete={handleActivityComplete} />;
       case "sanctuary":
         return (
           <EcoSanctuary 
@@ -222,13 +235,13 @@ const Index = () => {
       </div>
 
       <div className="grid md:grid-cols-4 gap-6">
-        <ElementalCard className="p-6 text-center">
+        <ElementalCard className="p-6 text-center glass-card">
           <Globe className="mx-auto text-primary mb-2" size={32} />
           <h3 className="font-bold text-lg">Your Impact</h3>
           <EcoPoints points={playerData.ecoPoints} size="lg" />
         </ElementalCard>
 
-        <ElementalCard className="p-6 text-center">
+        <ElementalCard className="p-6 text-center glass-card">
           <TreePine className="mx-auto text-accent mb-2" size={32} />
           <h3 className="font-bold text-lg">Regions Restored</h3>
           <p className="text-2xl font-bold text-accent">
@@ -236,7 +249,7 @@ const Index = () => {
           </p>
         </ElementalCard>
 
-        <ElementalCard className="p-6 text-center">
+        <ElementalCard className="p-6 text-center glass-card">
           <Users className="mx-auto text-river mb-2" size={32} />
           <h3 className="font-bold text-lg">Guardian Rank</h3>
           <p className="text-2xl font-bold text-river">
@@ -244,7 +257,7 @@ const Index = () => {
           </p>
         </ElementalCard>
 
-        <ElementalCard className="p-6 text-center">
+        <ElementalCard className="p-6 text-center glass-card">
           <Sparkles className="mx-auto text-orange-500 mb-2" size={32} />
           <h3 className="font-bold text-lg">Daily Streak</h3>
           <p className="text-2xl font-bold text-orange-500">
@@ -259,7 +272,7 @@ const Index = () => {
       />
 
       <div className="grid md:grid-cols-2 gap-6">
-        <ElementalCard className="p-6">
+        <ElementalCard className="p-6 glass-card">
           <div className="flex items-center gap-4 mb-4">
             <Globe className="text-primary" size={32} />
             <div>
@@ -311,7 +324,7 @@ const Index = () => {
           </ElementalButton>
         </ElementalCard>
 
-        <ElementalCard className="p-6">
+        <ElementalCard className="p-6 glass-card">
           <div className="flex items-center gap-4 mb-4">
             <Home className="text-accent" size={32} />
             <div>
@@ -330,36 +343,80 @@ const Index = () => {
           </ElementalButton>
         </ElementalCard>
 
-        <ElementalCard className="p-6">
+        <ElementalCard className="p-6 glass-card">
           <div className="flex items-center gap-4 mb-4">
             <Gamepad2 className="text-river" size={32} />
             <div>
-              <h3 className="text-xl font-bold">Play Mini-Games</h3>
+              <h3 className="text-xl font-bold">Mini-Games Collection</h3>
               <p className="text-muted-foreground">
-                Learn through fun activities and earn Eco-Points
+                Play engaging games and learn environmental skills
               </p>
             </div>
           </div>
-          <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-2">
             <ElementalButton 
               element="river" 
               onClick={() => setCurrentView("game")}
-              className="w-full"
+              className="w-full text-sm p-3"
             >
               ♻️ Recycle Rush
             </ElementalButton>
             <ElementalButton 
               element="earth" 
               onClick={() => setCurrentView("pollution")}
-              className="w-full"
+              className="w-full text-sm p-3"
             >
-              <Zap className="mr-2" size={16} />
-              Pollution Purge
+              🧹 Pollution Purge
+            </ElementalButton>
+            <ElementalButton 
+              element="river" 
+              onClick={() => setCurrentView("water")}
+              className="w-full text-sm p-3"
+            >
+              <Droplets className="mr-1" size={12} />
+              Water Guard
+            </ElementalButton>
+            <ElementalButton 
+              element="sky" 
+              onClick={() => setCurrentView("energy")}
+              className="w-full text-sm p-3"
+            >
+              <Zap className="mr-1" size={12} />
+              Energy Hero
             </ElementalButton>
           </div>
         </ElementalCard>
 
-        <ElementalCard className="p-6">
+        <ElementalCard className="p-6 glass-card">
+          <div className="flex items-center gap-4 mb-4">
+            <Shield className="text-green-500" size={32} />
+            <div>
+              <h3 className="text-xl font-bold">Conservation Challenges</h3>
+              <p className="text-muted-foreground">
+                Protect wildlife and reduce your carbon footprint
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <ElementalButton 
+              element="forest" 
+              onClick={() => setCurrentView("wildlife")}
+              className="w-full text-sm p-3"
+            >
+              🛡️ Wildlife Guard
+            </ElementalButton>
+            <ElementalButton 
+              element="earth" 
+              onClick={() => setCurrentView("carbon")}
+              className="w-full text-sm p-3"
+            >
+              <Leaf className="mr-1" size={12} />
+              Carbon Fighter
+            </ElementalButton>
+          </div>
+        </ElementalCard>
+
+        <ElementalCard className="p-6 glass-card">
           <div className="flex items-center gap-4 mb-4">
             <BookOpen className="text-secondary" size={32} />
             <div>
@@ -379,7 +436,7 @@ const Index = () => {
         </ElementalCard>
       </div>
 
-      <ElementalCard className="p-6 bg-gradient-to-br from-primary/5 to-accent/5">
+      <ElementalCard className="p-6 bg-gradient-to-br from-primary/5 to-accent/5 glass-card">
         <div className="text-center space-y-3">
           <Sparkles className="mx-auto text-primary" size={32} />
           <h3 className="text-xl font-bold">Real-World Challenges & AR Adventures</h3>
@@ -395,19 +452,22 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <InteractiveBackground theme="forest" intensity="medium" />
+      
       {currentView !== "home" && (
-        <div className="p-4">
+        <div className="p-4 relative z-10">
           <ElementalButton 
             element="forest" 
             onClick={() => setCurrentView("home")}
+            className="glass-button"
           >
             ← Back to Home
           </ElementalButton>
         </div>
       )}
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative z-10">
         {renderView()}
       </div>
 
