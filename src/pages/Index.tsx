@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ElementalCard } from "@/components/ui/ElementalCard";
-import { ElementalButton } from "@/components/ui/ElementalButton";
+import { ElementalButton } from "@/components/ui/ElaementalButton";
 import { Badge } from "@/components/ui/badge";
 import { EcoPoints } from "@/components/EcoPoints";
 import { LevelProgress } from "@/components/LevelProgress";
@@ -12,7 +12,7 @@ import { AvatarEvolution } from "@/components/AvatarEvolution";
 import { DailyStreak } from "@/components/DailyStreak";
 import { PollutionPurgeGame } from "@/components/PollutionPurgeGame";
 import { EcoSanctuary } from "@/components/EcoSanctuary";
-import { Sparkles, Globe, TreePine, Users, BookOpen, Gamepad2, Home, Zap } from "lucide-react";
+import { Sparkles, Globe, TreePine, Users, BookOpen, Gamepad2, Home, Zap, Trophy, Package } from "lucide-react";
 import guardianImage from "@/assets/elemental-guardians.jpg";
 import { useToast } from "@/hooks/use-toast";
 
