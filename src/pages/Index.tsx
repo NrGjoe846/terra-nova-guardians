@@ -141,6 +141,12 @@ const Index = () => {
                 ecoPoints: prev.ecoPoints - cost
               }));
             }}
+            onEcoPointsEarned={(points) => {
+              setPlayerData(prev => ({
+                ...prev,
+                ecoPoints: prev.ecoPoints + points
+              }));
+            }}
           />
         );
       default:
