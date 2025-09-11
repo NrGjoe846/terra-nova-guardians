@@ -257,16 +257,49 @@ const Index = () => {
             <div>
               <h3 className="text-xl font-bold">Explore Terra Nova</h3>
               <p className="text-muted-foreground">
-                Visit the elemental regions and begin your restoration journey
+                Discover magical regions and restore the elemental balance
               </p>
             </div>
           </div>
+          
+          {/* Region Preview Cards */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            {regions.map((region) => (
+              <div 
+                key={region.id}
+                className={cn(
+                  "p-3 rounded-lg border transition-all duration-200",
+                  region.unlocked 
+                    ? "border-primary/30 bg-primary/5 hover:border-primary/50 cursor-pointer" 
+                    : "border-border bg-muted/30 opacity-60"
+                )}
+                onClick={() => region.unlocked && setCurrentView("map")}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <div className={cn(
+                    "w-3 h-3 rounded-full",
+                    region.unlocked ? "bg-primary animate-pulse" : "bg-muted-foreground"
+                  )} />
+                  <span className="font-medium text-sm">{region.name}</span>
+                </div>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className="font-medium">{region.progress}%</span>
+                  </div>
+                  <Progress value={region.progress} className="h-1" />
+                </div>
+              </div>
+            ))}
+          </div>
+          
           <ElementalButton 
             element="forest" 
             onClick={() => setCurrentView("map")}
             className="w-full"
           >
-            Open World Map
+            <Globe className="mr-2" size={16} />
+            Open Full World Map
           </ElementalButton>
         </ElementalCard>
 
@@ -391,3 +424,4 @@ const Index = () => {
 };
 
 export default Index;
+s
